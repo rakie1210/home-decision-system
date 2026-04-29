@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@rolldown/binding-darwin-arm64": "1.0.0-rc.17",
+    "@rollup/rollup-darwin-arm64": "^4.60.2",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },
