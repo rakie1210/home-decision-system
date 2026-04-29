@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  recipes   Recipe[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Recipe {
+  id            String   @id @default(uuid())
+  title         String
+  description   String
+  baseServings  Int      @default(2)
+  ingredients   RecipeIngredient[]
+  instructions  String[]
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+//This is your nutrition source of truth.
+model Ingredient {
+  id                  String   @id @default(uuid())
+  name                String
+  caloriesPer100g     Float
+  proteinPer100g      Float
+  fatPer100g          Float
+  carbohydratesPer100g Float
+  recipeLinks         RecipeIngredient[]
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+//This is where scaling + units happen.
+model RecipeIngredient {
+  id           String   @id @default(uuid())
+  recipeId     String
+  ingredientId String
+  quantity     Float
+  unit         UnitType
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+}
+
+enum UnitType {
+  G
+  KG
+  ML
+  L
+  PIECE
+  CUP
+  TBSP
+  TSP
+  DL
+}

@@ -1,0 +1,30 @@
+{
+  "devDependencies": {
+    "@prisma/client": "^7.7.0",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.0",
+    "cpx": "^1.5.0",
+    "prisma": "^7.7.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.7.0",
+    "@types/cors": "^2.8.19",
+    "@types/jsonwebtoken": "^9.0.10",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "type": "module",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "prisma:generate": "prisma generate",
+    "dev": "tsx watch ./src/server.ts",
+    "build": "pnpm run clean && tsc && pnpm run move:prisma",
+    "move:prisma": "mkdir -p dist/prisma && mv dist/prisma.* dist/prisma/",
+    "start": "node ./dist/server.js"
+  }
+}
