@@ -11,7 +11,7 @@
     // Set moduleResolution to a valid value for the TypeScript toolchain.
     "moduleResolution": "bundler",
     "target": "esnext",
-    "types": [],
+    "types": ["node", "express", "multer"],
 
     // Other Outputs
     "sourceMap": true,

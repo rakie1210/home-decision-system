@@ -23,21 +23,25 @@ model User {
 }
 
 model Recipe {
-  id            String   @id @default(uuid())
+  id            String    @id @default(uuid())  // UUID primary key
+  recipeSlug    String    @unique               // Unique slug for URL-friendly identifiers
+  imageKey      String?                         // Optional image key for AWS S3 storage
+  
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String
   title         String
   description   String
   baseServings  Int      @default(2)
   ingredients   RecipeIngredient[]
   instructions  String[]
-  userId        String
-  user          User     @relation(fields: [userId], references: [id])
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
 
 //This is your nutrition source of truth.
 model Ingredient {
-  id                  String   @id @default(uuid())
+  id            String   @id @default(uuid())
+  ingredientId        String
   name                String
   caloriesPer100g     Float
   proteinPer100g      Float

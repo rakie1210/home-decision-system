@@ -87,11 +87,13 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const RecipeScalarFieldEnum = {
   id: 'id',
+  recipeSlug: 'recipeSlug',
+  imageKey: 'imageKey',
+  userId: 'userId',
   title: 'title',
   description: 'description',
   baseServings: 'baseServings',
   instructions: 'instructions',
-  userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -101,6 +103,7 @@ export type RecipeScalarFieldEnum = (typeof RecipeScalarFieldEnum)[keyof typeof 
 
 export const IngredientScalarFieldEnum = {
   id: 'id',
+  ingredientId: 'ingredientId',
   name: 'name',
   caloriesPer100g: 'caloriesPer100g',
   proteinPer100g: 'proteinPer100g',
@@ -138,4 +141,12 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

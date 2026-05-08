@@ -8,6 +8,8 @@ import jwt from "jsonwebtoken";
 import { prisma } from "./prisma";
 import { env } from "process";
 import cors from "cors";
+import multer from "multer";
+import { uploadRecipeImageToS3, createRecipeSlug } from "./helper";
 
 declare global {
   namespace Express {
@@ -16,6 +18,10 @@ declare global {
     }
   }
 }
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+});
 
 const JWT_SECRET = env.JWT_SECRET;
 
@@ -78,26 +84,36 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-// Create a new recipe
-app.post("/api/recipes", authenticateToken, async (req, res) => {
-  try {
-    const { title, description, baseServings, ingredients, instructions } =
-      req.body;
-    const recipe = await prisma.recipe.create({
-      data: {
+export function createNewRecipe() {
+  // Create a new recipe
+  app.post("/api/recipes", authenticateToken, async (req, res) => {
+    try {
+      const {
         title,
         description,
         baseServings,
-        instructions,
         ingredients,
-        userId: req.user.id,
-      },
-    });
-    res.json(recipe);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
-  }
-});
+        instructions,
+        imageKey,
+      } = req.body;
+      const recipe = await prisma.recipe.create({
+        data: {
+          title,
+          recipeSlug: createRecipeSlug(title),
+          imageKey,
+          description,
+          baseServings,
+          instructions,
+          ingredients,
+          userId: req.user.id,
+        },
+      });
+      res.json(recipe);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+}
 
 // Health check endpoint
 app.get("/", (_req, res) => {
@@ -107,3 +123,59 @@ app.get("/", (_req, res) => {
 app.listen(3001, () => {
   console.log("Server running on port 3001.");
 });
+
+// save the imageKey from uploadRecipeImageToS3
+// in helper.ts to Prisma DB
+export async function saveImageKeyToPrisma() {
+  app.post(
+    "/api/recipes/:id/image",
+    authenticateToken,
+    upload.single("image"),
+    async (req, res) => {
+      try {
+        // Check if the image file exists
+        if (!req.file) {
+          return res.status(400).json({ error: "Image file is required" });
+        }
+
+        // Check if the recipeId is valid and a string
+        if (typeof req.params.id !== "string") {
+          return res.status(400).json({ error: "Invalid recipe ID" });
+        }
+
+        // Check the owner of the recipe
+        const recipe = await prisma.recipe.findFirst({
+          where: {
+            id: req.params.id,
+            userId: req.user.id,
+          },
+        });
+
+        if (!recipe) {
+          return res.status(404).json({ error: "Recipe not found" });
+        }
+
+        const imageKey = await uploadRecipeImageToS3({
+          recipeId: req.params.id,
+          file: req.file,
+        });
+
+        // Update the prisma.recipe.imageKey
+        const updateRecipe = await prisma.recipe.update({
+          where: {
+            id: req.params.id,
+          },
+          data: {
+            imageKey,
+          },
+        });
+        res.json(updateRecipe);
+      } catch (error: any) {
+        console.error("saveImageKeyToPrisma=> ", error);
+        return res
+          .status(500)
+          .json({ error: "Image Key is not saved successfully." });
+      }
+    },
+  );
+}
