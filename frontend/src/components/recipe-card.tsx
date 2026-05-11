@@ -10,7 +10,7 @@ type RecipeCardProps = {
   duration: string;
   difficulty: string;
   rating: string;
-  defaultFavorite?: boolean & undefined;
+  defaultFavorite?: boolean;
   imageAlt?: string;
   onClick?: () => void;
   currentPage?: string;

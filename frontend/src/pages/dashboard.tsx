@@ -44,6 +44,7 @@ export default function Dashboard() {
       suggestion:
         "It is lunchtime. Let's make something fresh, filling, and very proud of itself.",
       image: lunchImage,
+      currentPage: "dashboard",
     },
     {
       startTime: "14:00",
@@ -52,6 +53,7 @@ export default function Dashboard() {
       suggestion:
         "Afternoon snack time. Let's make a little treat before dinner starts asking questions.",
       image: afterNoonImage,
+      currentPage: "dashboard",
     },
     {
       startTime: "18:00",
@@ -60,6 +62,7 @@ export default function Dashboard() {
       suggestion:
         "Dinner time. Let's cook something warm, satisfying, and worthy of a second helping.",
       image: dinnerImage,
+      currentPage: "dashboard",
     },
     {
       startTime: "22:00",
@@ -68,6 +71,7 @@ export default function Dashboard() {
       suggestion:
         "Late-night kitchen visit? Let's make something cozy, quiet, and absolutely not judgey.",
       image: midnightImage,
+      currentPage: "dashboard",
     },
   ];
   const favoriteRecipes = [
@@ -78,6 +82,7 @@ export default function Dashboard() {
       difficulty: "Easy",
       rating: "4.8",
       defaultFavorite: true,
+      currentPage: "dashboard",
       onClick: () => navigate("/recipes/view"),
     },
     {
@@ -86,6 +91,7 @@ export default function Dashboard() {
       duration: "35 min",
       difficulty: "Medium",
       rating: "4.9",
+      currentPage: "dashboard",
     },
     {
       title: "Binignit",
@@ -93,6 +99,7 @@ export default function Dashboard() {
       duration: "20 min",
       difficulty: "Easy",
       rating: "4.7",
+      currentPage: "dashboard",
     },
     {
       title: "Pistachio Raspberry Cake",
@@ -100,6 +107,7 @@ export default function Dashboard() {
       duration: "1 hr 30 min",
       difficulty: "Easy",
       rating: "5.0",
+      currentPage: "dashboard",
     },
   ];
 
