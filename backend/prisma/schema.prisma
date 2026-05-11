@@ -18,6 +18,7 @@ model User {
   email     String   @unique
   password  String
   recipes   Recipe[]
+  favorites FavoriteRecipe[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -26,7 +27,6 @@ model Recipe {
   id            String    @id @default(uuid())  // UUID primary key
   recipeSlug    String    @unique               // Unique slug for URL-friendly identifiers
   imageKey      String?                         // Optional image key for AWS S3 storage
-  
   user          User     @relation(fields: [userId], references: [id])
   userId        String
   title         String
@@ -34,6 +34,8 @@ model Recipe {
   baseServings  Int      @default(2)
   ingredients   RecipeIngredient[]
   instructions  String[]
+  variants      RecipeVariant[]
+  favoritedBy   FavoriteRecipe[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
@@ -47,20 +49,92 @@ model Ingredient {
   proteinPer100g      Float
   fatPer100g          Float
   carbohydratesPer100g Float
-  recipeLinks         RecipeIngredient[]
+  nativeCountry           Country? @relation(fields: [nativeCountryId], references: [id])
+  nativeCountryId         String?
+
+  recipeLinks             RecipeIngredient[]
+  recipeVariantLinks      RecipeVariantIngredient[]
+  
+  substitutionsFrom       IngredientSubstitution[] @relation("SubstitutionFrom")
+  substitutionsTo         IngredientSubstitution[] @relation("SubstitutionTo")
+
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
 }
 
-//This is where scaling + units happen.
+model IngredientSubstitution {
+  id               String     @id @default(uuid())
+
+  fromIngredient   Ingredient @relation("SubstitutionFrom", fields: [fromIngredientId], references: [id])
+  fromIngredientId String
+
+  toIngredient     Ingredient @relation("SubstitutionTo", fields: [toIngredientId], references: [id])
+  toIngredientId   String
+
+  country          Country?   @relation(fields: [countryId], references: [id])
+  countryId        String?
+
+  ratio            Float      @default(1)
+  notes            String?
+  confidence       Float?
+
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  @@unique([fromIngredientId, toIngredientId, countryId])
+}
+
+//This means that this recipe uses this ingredient in this amount
 model RecipeIngredient {
-  id           String   @id @default(uuid())
+   id           String     @id @default(uuid())
+
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
   recipeId     String
+
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId String
+
   quantity     Float
   unit         UnitType
-  recipe       Recipe     @relation(fields: [recipeId], references: [id])
-  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  note         String?
+
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model RecipeVariant {
+  id            String    @id @default(uuid())
+
+  baseRecipe    Recipe    @relation(fields: [baseRecipeId], references: [id])
+  baseRecipeId  String
+
+  country       Country   @relation(fields: [countryId], references: [id])
+  countryId     String
+
+  title         String
+  description   String?
+  ingredients   RecipeVariantIngredient[]
+  instructions  String[]
+
+  notes         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([baseRecipeId, countryId])
+}
+
+model RecipeVariantIngredient {
+  id              String        @id @default(uuid())
+
+  recipeVariant   RecipeVariant @relation(fields: [recipeVariantId], references: [id])
+  recipeVariantId String
+
+  ingredient      Ingredient    @relation(fields: [ingredientId], references: [id])
+  ingredientId    String
+
+  quantity        Float
+  unit            UnitType
+  note            String?
 }
 
 enum UnitType {
@@ -73,4 +147,25 @@ enum UnitType {
   TBSP
   TSP
   DL
+}
+
+model FavoriteRecipe {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  recipe    Recipe   @relation(fields: [recipeId], references: [id])
+  recipeId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Country {
+  id        String   @id @default(uuid())
+  name      String
+  code      String
+  ingredients Ingredient[]
+  recipeVariants RecipeVariant[]
+  ingredientSubstitutions IngredientSubstitution[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

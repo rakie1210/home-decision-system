@@ -33,7 +33,32 @@ export type Recipe = Prisma.RecipeModel
  */
 export type Ingredient = Prisma.IngredientModel
 /**
+ * Model IngredientSubstitution
+ * 
+ */
+export type IngredientSubstitution = Prisma.IngredientSubstitutionModel
+/**
  * Model RecipeIngredient
  * 
  */
 export type RecipeIngredient = Prisma.RecipeIngredientModel
+/**
+ * Model RecipeVariant
+ * 
+ */
+export type RecipeVariant = Prisma.RecipeVariantModel
+/**
+ * Model RecipeVariantIngredient
+ * 
+ */
+export type RecipeVariantIngredient = Prisma.RecipeVariantIngredientModel
+/**
+ * Model FavoriteRecipe
+ * 
+ */
+export type FavoriteRecipe = Prisma.FavoriteRecipeModel
+/**
+ * Model Country
+ * 
+ */
+export type Country = Prisma.CountryModel

@@ -54,7 +54,12 @@ export const ModelName = {
   User: 'User',
   Recipe: 'Recipe',
   Ingredient: 'Ingredient',
-  RecipeIngredient: 'RecipeIngredient'
+  IngredientSubstitution: 'IngredientSubstitution',
+  RecipeIngredient: 'RecipeIngredient',
+  RecipeVariant: 'RecipeVariant',
+  RecipeVariantIngredient: 'RecipeVariantIngredient',
+  FavoriteRecipe: 'FavoriteRecipe',
+  Country: 'Country'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -109,6 +114,7 @@ export const IngredientScalarFieldEnum = {
   proteinPer100g: 'proteinPer100g',
   fatPer100g: 'fatPer100g',
   carbohydratesPer100g: 'carbohydratesPer100g',
+  nativeCountryId: 'nativeCountryId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -116,15 +122,82 @@ export const IngredientScalarFieldEnum = {
 export type IngredientScalarFieldEnum = (typeof IngredientScalarFieldEnum)[keyof typeof IngredientScalarFieldEnum]
 
 
+export const IngredientSubstitutionScalarFieldEnum = {
+  id: 'id',
+  fromIngredientId: 'fromIngredientId',
+  toIngredientId: 'toIngredientId',
+  countryId: 'countryId',
+  ratio: 'ratio',
+  notes: 'notes',
+  confidence: 'confidence',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IngredientSubstitutionScalarFieldEnum = (typeof IngredientSubstitutionScalarFieldEnum)[keyof typeof IngredientSubstitutionScalarFieldEnum]
+
+
 export const RecipeIngredientScalarFieldEnum = {
   id: 'id',
   recipeId: 'recipeId',
   ingredientId: 'ingredientId',
   quantity: 'quantity',
-  unit: 'unit'
+  unit: 'unit',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type RecipeIngredientScalarFieldEnum = (typeof RecipeIngredientScalarFieldEnum)[keyof typeof RecipeIngredientScalarFieldEnum]
+
+
+export const RecipeVariantScalarFieldEnum = {
+  id: 'id',
+  baseRecipeId: 'baseRecipeId',
+  countryId: 'countryId',
+  title: 'title',
+  description: 'description',
+  instructions: 'instructions',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RecipeVariantScalarFieldEnum = (typeof RecipeVariantScalarFieldEnum)[keyof typeof RecipeVariantScalarFieldEnum]
+
+
+export const RecipeVariantIngredientScalarFieldEnum = {
+  id: 'id',
+  recipeVariantId: 'recipeVariantId',
+  ingredientId: 'ingredientId',
+  quantity: 'quantity',
+  unit: 'unit',
+  note: 'note'
+} as const
+
+export type RecipeVariantIngredientScalarFieldEnum = (typeof RecipeVariantIngredientScalarFieldEnum)[keyof typeof RecipeVariantIngredientScalarFieldEnum]
+
+
+export const FavoriteRecipeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  recipeId: 'recipeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FavoriteRecipeScalarFieldEnum = (typeof FavoriteRecipeScalarFieldEnum)[keyof typeof FavoriteRecipeScalarFieldEnum]
+
+
+export const CountryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CountryScalarFieldEnum = (typeof CountryScalarFieldEnum)[keyof typeof CountryScalarFieldEnum]
 
 
 export const SortOrder = {

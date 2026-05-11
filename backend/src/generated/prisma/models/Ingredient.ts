@@ -48,6 +48,7 @@ export type IngredientMinAggregateOutputType = {
   proteinPer100g: number | null
   fatPer100g: number | null
   carbohydratesPer100g: number | null
+  nativeCountryId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -60,6 +61,7 @@ export type IngredientMaxAggregateOutputType = {
   proteinPer100g: number | null
   fatPer100g: number | null
   carbohydratesPer100g: number | null
+  nativeCountryId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -72,6 +74,7 @@ export type IngredientCountAggregateOutputType = {
   proteinPer100g: number
   fatPer100g: number
   carbohydratesPer100g: number
+  nativeCountryId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -100,6 +103,7 @@ export type IngredientMinAggregateInputType = {
   proteinPer100g?: true
   fatPer100g?: true
   carbohydratesPer100g?: true
+  nativeCountryId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -112,6 +116,7 @@ export type IngredientMaxAggregateInputType = {
   proteinPer100g?: true
   fatPer100g?: true
   carbohydratesPer100g?: true
+  nativeCountryId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -124,6 +129,7 @@ export type IngredientCountAggregateInputType = {
   proteinPer100g?: true
   fatPer100g?: true
   carbohydratesPer100g?: true
+  nativeCountryId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -223,6 +229,7 @@ export type IngredientGroupByOutputType = {
   proteinPer100g: number
   fatPer100g: number
   carbohydratesPer100g: number
+  nativeCountryId: string | null
   createdAt: Date
   updatedAt: Date
   _count: IngredientCountAggregateOutputType | null
@@ -258,9 +265,14 @@ export type IngredientWhereInput = {
   proteinPer100g?: Prisma.FloatFilter<"Ingredient"> | number
   fatPer100g?: Prisma.FloatFilter<"Ingredient"> | number
   carbohydratesPer100g?: Prisma.FloatFilter<"Ingredient"> | number
+  nativeCountryId?: Prisma.StringNullableFilter<"Ingredient"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Ingredient"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ingredient"> | Date | string
+  nativeCountry?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
   recipeLinks?: Prisma.RecipeIngredientListRelationFilter
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientListRelationFilter
+  substitutionsFrom?: Prisma.IngredientSubstitutionListRelationFilter
+  substitutionsTo?: Prisma.IngredientSubstitutionListRelationFilter
 }
 
 export type IngredientOrderByWithRelationInput = {
@@ -271,9 +283,14 @@ export type IngredientOrderByWithRelationInput = {
   proteinPer100g?: Prisma.SortOrder
   fatPer100g?: Prisma.SortOrder
   carbohydratesPer100g?: Prisma.SortOrder
+  nativeCountryId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  nativeCountry?: Prisma.CountryOrderByWithRelationInput
   recipeLinks?: Prisma.RecipeIngredientOrderByRelationAggregateInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientOrderByRelationAggregateInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionOrderByRelationAggregateInput
+  substitutionsTo?: Prisma.IngredientSubstitutionOrderByRelationAggregateInput
 }
 
 export type IngredientWhereUniqueInput = Prisma.AtLeast<{
@@ -287,9 +304,14 @@ export type IngredientWhereUniqueInput = Prisma.AtLeast<{
   proteinPer100g?: Prisma.FloatFilter<"Ingredient"> | number
   fatPer100g?: Prisma.FloatFilter<"Ingredient"> | number
   carbohydratesPer100g?: Prisma.FloatFilter<"Ingredient"> | number
+  nativeCountryId?: Prisma.StringNullableFilter<"Ingredient"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Ingredient"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ingredient"> | Date | string
+  nativeCountry?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
   recipeLinks?: Prisma.RecipeIngredientListRelationFilter
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientListRelationFilter
+  substitutionsFrom?: Prisma.IngredientSubstitutionListRelationFilter
+  substitutionsTo?: Prisma.IngredientSubstitutionListRelationFilter
 }, "id">
 
 export type IngredientOrderByWithAggregationInput = {
@@ -300,6 +322,7 @@ export type IngredientOrderByWithAggregationInput = {
   proteinPer100g?: Prisma.SortOrder
   fatPer100g?: Prisma.SortOrder
   carbohydratesPer100g?: Prisma.SortOrder
+  nativeCountryId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.IngredientCountOrderByAggregateInput
@@ -320,6 +343,7 @@ export type IngredientScalarWhereWithAggregatesInput = {
   proteinPer100g?: Prisma.FloatWithAggregatesFilter<"Ingredient"> | number
   fatPer100g?: Prisma.FloatWithAggregatesFilter<"Ingredient"> | number
   carbohydratesPer100g?: Prisma.FloatWithAggregatesFilter<"Ingredient"> | number
+  nativeCountryId?: Prisma.StringNullableWithAggregatesFilter<"Ingredient"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Ingredient"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Ingredient"> | Date | string
 }
@@ -334,7 +358,11 @@ export type IngredientCreateInput = {
   carbohydratesPer100g: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  nativeCountry?: Prisma.CountryCreateNestedOneWithoutIngredientsInput
   recipeLinks?: Prisma.RecipeIngredientCreateNestedManyWithoutIngredientInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientCreateNestedManyWithoutIngredientInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionCreateNestedManyWithoutFromIngredientInput
+  substitutionsTo?: Prisma.IngredientSubstitutionCreateNestedManyWithoutToIngredientInput
 }
 
 export type IngredientUncheckedCreateInput = {
@@ -345,9 +373,13 @@ export type IngredientUncheckedCreateInput = {
   proteinPer100g: number
   fatPer100g: number
   carbohydratesPer100g: number
+  nativeCountryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   recipeLinks?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutIngredientInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUncheckedCreateNestedManyWithoutIngredientInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutFromIngredientInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutToIngredientInput
 }
 
 export type IngredientUpdateInput = {
@@ -360,7 +392,11 @@ export type IngredientUpdateInput = {
   carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nativeCountry?: Prisma.CountryUpdateOneWithoutIngredientsNestedInput
   recipeLinks?: Prisma.RecipeIngredientUpdateManyWithoutIngredientNestedInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUpdateManyWithoutIngredientNestedInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUpdateManyWithoutFromIngredientNestedInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUpdateManyWithoutToIngredientNestedInput
 }
 
 export type IngredientUncheckedUpdateInput = {
@@ -371,9 +407,13 @@ export type IngredientUncheckedUpdateInput = {
   proteinPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
   fatPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
   carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  nativeCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   recipeLinks?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutIngredientNestedInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUncheckedUpdateManyWithoutIngredientNestedInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutFromIngredientNestedInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutToIngredientNestedInput
 }
 
 export type IngredientCreateManyInput = {
@@ -384,6 +424,7 @@ export type IngredientCreateManyInput = {
   proteinPer100g: number
   fatPer100g: number
   carbohydratesPer100g: number
+  nativeCountryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -408,6 +449,7 @@ export type IngredientUncheckedUpdateManyInput = {
   proteinPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
   fatPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
   carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  nativeCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -420,6 +462,7 @@ export type IngredientCountOrderByAggregateInput = {
   proteinPer100g?: Prisma.SortOrder
   fatPer100g?: Prisma.SortOrder
   carbohydratesPer100g?: Prisma.SortOrder
+  nativeCountryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -439,6 +482,7 @@ export type IngredientMaxOrderByAggregateInput = {
   proteinPer100g?: Prisma.SortOrder
   fatPer100g?: Prisma.SortOrder
   carbohydratesPer100g?: Prisma.SortOrder
+  nativeCountryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -451,6 +495,7 @@ export type IngredientMinOrderByAggregateInput = {
   proteinPer100g?: Prisma.SortOrder
   fatPer100g?: Prisma.SortOrder
   carbohydratesPer100g?: Prisma.SortOrder
+  nativeCountryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -467,12 +512,50 @@ export type IngredientScalarRelationFilter = {
   isNot?: Prisma.IngredientWhereInput
 }
 
+export type IngredientListRelationFilter = {
+  every?: Prisma.IngredientWhereInput
+  some?: Prisma.IngredientWhereInput
+  none?: Prisma.IngredientWhereInput
+}
+
+export type IngredientOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type FloatFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type IngredientCreateNestedOneWithoutSubstitutionsFromInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutSubstitutionsFromInput, Prisma.IngredientUncheckedCreateWithoutSubstitutionsFromInput>
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutSubstitutionsFromInput
+  connect?: Prisma.IngredientWhereUniqueInput
+}
+
+export type IngredientCreateNestedOneWithoutSubstitutionsToInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutSubstitutionsToInput, Prisma.IngredientUncheckedCreateWithoutSubstitutionsToInput>
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutSubstitutionsToInput
+  connect?: Prisma.IngredientWhereUniqueInput
+}
+
+export type IngredientUpdateOneRequiredWithoutSubstitutionsFromNestedInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutSubstitutionsFromInput, Prisma.IngredientUncheckedCreateWithoutSubstitutionsFromInput>
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutSubstitutionsFromInput
+  upsert?: Prisma.IngredientUpsertWithoutSubstitutionsFromInput
+  connect?: Prisma.IngredientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.IngredientUpdateToOneWithWhereWithoutSubstitutionsFromInput, Prisma.IngredientUpdateWithoutSubstitutionsFromInput>, Prisma.IngredientUncheckedUpdateWithoutSubstitutionsFromInput>
+}
+
+export type IngredientUpdateOneRequiredWithoutSubstitutionsToNestedInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutSubstitutionsToInput, Prisma.IngredientUncheckedCreateWithoutSubstitutionsToInput>
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutSubstitutionsToInput
+  upsert?: Prisma.IngredientUpsertWithoutSubstitutionsToInput
+  connect?: Prisma.IngredientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.IngredientUpdateToOneWithWhereWithoutSubstitutionsToInput, Prisma.IngredientUpdateWithoutSubstitutionsToInput>, Prisma.IngredientUncheckedUpdateWithoutSubstitutionsToInput>
 }
 
 export type IngredientCreateNestedOneWithoutRecipeLinksInput = {
@@ -489,6 +572,222 @@ export type IngredientUpdateOneRequiredWithoutRecipeLinksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.IngredientUpdateToOneWithWhereWithoutRecipeLinksInput, Prisma.IngredientUpdateWithoutRecipeLinksInput>, Prisma.IngredientUncheckedUpdateWithoutRecipeLinksInput>
 }
 
+export type IngredientCreateNestedOneWithoutRecipeVariantLinksInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutRecipeVariantLinksInput, Prisma.IngredientUncheckedCreateWithoutRecipeVariantLinksInput>
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutRecipeVariantLinksInput
+  connect?: Prisma.IngredientWhereUniqueInput
+}
+
+export type IngredientUpdateOneRequiredWithoutRecipeVariantLinksNestedInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutRecipeVariantLinksInput, Prisma.IngredientUncheckedCreateWithoutRecipeVariantLinksInput>
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutRecipeVariantLinksInput
+  upsert?: Prisma.IngredientUpsertWithoutRecipeVariantLinksInput
+  connect?: Prisma.IngredientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.IngredientUpdateToOneWithWhereWithoutRecipeVariantLinksInput, Prisma.IngredientUpdateWithoutRecipeVariantLinksInput>, Prisma.IngredientUncheckedUpdateWithoutRecipeVariantLinksInput>
+}
+
+export type IngredientCreateNestedManyWithoutNativeCountryInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutNativeCountryInput, Prisma.IngredientUncheckedCreateWithoutNativeCountryInput> | Prisma.IngredientCreateWithoutNativeCountryInput[] | Prisma.IngredientUncheckedCreateWithoutNativeCountryInput[]
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutNativeCountryInput | Prisma.IngredientCreateOrConnectWithoutNativeCountryInput[]
+  createMany?: Prisma.IngredientCreateManyNativeCountryInputEnvelope
+  connect?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+}
+
+export type IngredientUncheckedCreateNestedManyWithoutNativeCountryInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutNativeCountryInput, Prisma.IngredientUncheckedCreateWithoutNativeCountryInput> | Prisma.IngredientCreateWithoutNativeCountryInput[] | Prisma.IngredientUncheckedCreateWithoutNativeCountryInput[]
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutNativeCountryInput | Prisma.IngredientCreateOrConnectWithoutNativeCountryInput[]
+  createMany?: Prisma.IngredientCreateManyNativeCountryInputEnvelope
+  connect?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+}
+
+export type IngredientUpdateManyWithoutNativeCountryNestedInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutNativeCountryInput, Prisma.IngredientUncheckedCreateWithoutNativeCountryInput> | Prisma.IngredientCreateWithoutNativeCountryInput[] | Prisma.IngredientUncheckedCreateWithoutNativeCountryInput[]
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutNativeCountryInput | Prisma.IngredientCreateOrConnectWithoutNativeCountryInput[]
+  upsert?: Prisma.IngredientUpsertWithWhereUniqueWithoutNativeCountryInput | Prisma.IngredientUpsertWithWhereUniqueWithoutNativeCountryInput[]
+  createMany?: Prisma.IngredientCreateManyNativeCountryInputEnvelope
+  set?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  disconnect?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  delete?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  connect?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  update?: Prisma.IngredientUpdateWithWhereUniqueWithoutNativeCountryInput | Prisma.IngredientUpdateWithWhereUniqueWithoutNativeCountryInput[]
+  updateMany?: Prisma.IngredientUpdateManyWithWhereWithoutNativeCountryInput | Prisma.IngredientUpdateManyWithWhereWithoutNativeCountryInput[]
+  deleteMany?: Prisma.IngredientScalarWhereInput | Prisma.IngredientScalarWhereInput[]
+}
+
+export type IngredientUncheckedUpdateManyWithoutNativeCountryNestedInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutNativeCountryInput, Prisma.IngredientUncheckedCreateWithoutNativeCountryInput> | Prisma.IngredientCreateWithoutNativeCountryInput[] | Prisma.IngredientUncheckedCreateWithoutNativeCountryInput[]
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutNativeCountryInput | Prisma.IngredientCreateOrConnectWithoutNativeCountryInput[]
+  upsert?: Prisma.IngredientUpsertWithWhereUniqueWithoutNativeCountryInput | Prisma.IngredientUpsertWithWhereUniqueWithoutNativeCountryInput[]
+  createMany?: Prisma.IngredientCreateManyNativeCountryInputEnvelope
+  set?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  disconnect?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  delete?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  connect?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  update?: Prisma.IngredientUpdateWithWhereUniqueWithoutNativeCountryInput | Prisma.IngredientUpdateWithWhereUniqueWithoutNativeCountryInput[]
+  updateMany?: Prisma.IngredientUpdateManyWithWhereWithoutNativeCountryInput | Prisma.IngredientUpdateManyWithWhereWithoutNativeCountryInput[]
+  deleteMany?: Prisma.IngredientScalarWhereInput | Prisma.IngredientScalarWhereInput[]
+}
+
+export type IngredientCreateWithoutSubstitutionsFromInput = {
+  id?: string
+  ingredientId: string
+  name: string
+  caloriesPer100g: number
+  proteinPer100g: number
+  fatPer100g: number
+  carbohydratesPer100g: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  nativeCountry?: Prisma.CountryCreateNestedOneWithoutIngredientsInput
+  recipeLinks?: Prisma.RecipeIngredientCreateNestedManyWithoutIngredientInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientCreateNestedManyWithoutIngredientInput
+  substitutionsTo?: Prisma.IngredientSubstitutionCreateNestedManyWithoutToIngredientInput
+}
+
+export type IngredientUncheckedCreateWithoutSubstitutionsFromInput = {
+  id?: string
+  ingredientId: string
+  name: string
+  caloriesPer100g: number
+  proteinPer100g: number
+  fatPer100g: number
+  carbohydratesPer100g: number
+  nativeCountryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  recipeLinks?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutIngredientInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUncheckedCreateNestedManyWithoutIngredientInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutToIngredientInput
+}
+
+export type IngredientCreateOrConnectWithoutSubstitutionsFromInput = {
+  where: Prisma.IngredientWhereUniqueInput
+  create: Prisma.XOR<Prisma.IngredientCreateWithoutSubstitutionsFromInput, Prisma.IngredientUncheckedCreateWithoutSubstitutionsFromInput>
+}
+
+export type IngredientCreateWithoutSubstitutionsToInput = {
+  id?: string
+  ingredientId: string
+  name: string
+  caloriesPer100g: number
+  proteinPer100g: number
+  fatPer100g: number
+  carbohydratesPer100g: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  nativeCountry?: Prisma.CountryCreateNestedOneWithoutIngredientsInput
+  recipeLinks?: Prisma.RecipeIngredientCreateNestedManyWithoutIngredientInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientCreateNestedManyWithoutIngredientInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionCreateNestedManyWithoutFromIngredientInput
+}
+
+export type IngredientUncheckedCreateWithoutSubstitutionsToInput = {
+  id?: string
+  ingredientId: string
+  name: string
+  caloriesPer100g: number
+  proteinPer100g: number
+  fatPer100g: number
+  carbohydratesPer100g: number
+  nativeCountryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  recipeLinks?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutIngredientInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUncheckedCreateNestedManyWithoutIngredientInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutFromIngredientInput
+}
+
+export type IngredientCreateOrConnectWithoutSubstitutionsToInput = {
+  where: Prisma.IngredientWhereUniqueInput
+  create: Prisma.XOR<Prisma.IngredientCreateWithoutSubstitutionsToInput, Prisma.IngredientUncheckedCreateWithoutSubstitutionsToInput>
+}
+
+export type IngredientUpsertWithoutSubstitutionsFromInput = {
+  update: Prisma.XOR<Prisma.IngredientUpdateWithoutSubstitutionsFromInput, Prisma.IngredientUncheckedUpdateWithoutSubstitutionsFromInput>
+  create: Prisma.XOR<Prisma.IngredientCreateWithoutSubstitutionsFromInput, Prisma.IngredientUncheckedCreateWithoutSubstitutionsFromInput>
+  where?: Prisma.IngredientWhereInput
+}
+
+export type IngredientUpdateToOneWithWhereWithoutSubstitutionsFromInput = {
+  where?: Prisma.IngredientWhereInput
+  data: Prisma.XOR<Prisma.IngredientUpdateWithoutSubstitutionsFromInput, Prisma.IngredientUncheckedUpdateWithoutSubstitutionsFromInput>
+}
+
+export type IngredientUpdateWithoutSubstitutionsFromInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingredientId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  caloriesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  proteinPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  fatPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nativeCountry?: Prisma.CountryUpdateOneWithoutIngredientsNestedInput
+  recipeLinks?: Prisma.RecipeIngredientUpdateManyWithoutIngredientNestedInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUpdateManyWithoutIngredientNestedInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUpdateManyWithoutToIngredientNestedInput
+}
+
+export type IngredientUncheckedUpdateWithoutSubstitutionsFromInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingredientId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  caloriesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  proteinPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  fatPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  nativeCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recipeLinks?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutIngredientNestedInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUncheckedUpdateManyWithoutIngredientNestedInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutToIngredientNestedInput
+}
+
+export type IngredientUpsertWithoutSubstitutionsToInput = {
+  update: Prisma.XOR<Prisma.IngredientUpdateWithoutSubstitutionsToInput, Prisma.IngredientUncheckedUpdateWithoutSubstitutionsToInput>
+  create: Prisma.XOR<Prisma.IngredientCreateWithoutSubstitutionsToInput, Prisma.IngredientUncheckedCreateWithoutSubstitutionsToInput>
+  where?: Prisma.IngredientWhereInput
+}
+
+export type IngredientUpdateToOneWithWhereWithoutSubstitutionsToInput = {
+  where?: Prisma.IngredientWhereInput
+  data: Prisma.XOR<Prisma.IngredientUpdateWithoutSubstitutionsToInput, Prisma.IngredientUncheckedUpdateWithoutSubstitutionsToInput>
+}
+
+export type IngredientUpdateWithoutSubstitutionsToInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingredientId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  caloriesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  proteinPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  fatPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nativeCountry?: Prisma.CountryUpdateOneWithoutIngredientsNestedInput
+  recipeLinks?: Prisma.RecipeIngredientUpdateManyWithoutIngredientNestedInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUpdateManyWithoutIngredientNestedInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUpdateManyWithoutFromIngredientNestedInput
+}
+
+export type IngredientUncheckedUpdateWithoutSubstitutionsToInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingredientId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  caloriesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  proteinPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  fatPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  nativeCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recipeLinks?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutIngredientNestedInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUncheckedUpdateManyWithoutIngredientNestedInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutFromIngredientNestedInput
+}
+
 export type IngredientCreateWithoutRecipeLinksInput = {
   id?: string
   ingredientId: string
@@ -499,6 +798,10 @@ export type IngredientCreateWithoutRecipeLinksInput = {
   carbohydratesPer100g: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  nativeCountry?: Prisma.CountryCreateNestedOneWithoutIngredientsInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientCreateNestedManyWithoutIngredientInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionCreateNestedManyWithoutFromIngredientInput
+  substitutionsTo?: Prisma.IngredientSubstitutionCreateNestedManyWithoutToIngredientInput
 }
 
 export type IngredientUncheckedCreateWithoutRecipeLinksInput = {
@@ -509,8 +812,12 @@ export type IngredientUncheckedCreateWithoutRecipeLinksInput = {
   proteinPer100g: number
   fatPer100g: number
   carbohydratesPer100g: number
+  nativeCountryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUncheckedCreateNestedManyWithoutIngredientInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutFromIngredientInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutToIngredientInput
 }
 
 export type IngredientCreateOrConnectWithoutRecipeLinksInput = {
@@ -539,9 +846,227 @@ export type IngredientUpdateWithoutRecipeLinksInput = {
   carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nativeCountry?: Prisma.CountryUpdateOneWithoutIngredientsNestedInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUpdateManyWithoutIngredientNestedInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUpdateManyWithoutFromIngredientNestedInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUpdateManyWithoutToIngredientNestedInput
 }
 
 export type IngredientUncheckedUpdateWithoutRecipeLinksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingredientId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  caloriesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  proteinPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  fatPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  nativeCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUncheckedUpdateManyWithoutIngredientNestedInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutFromIngredientNestedInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutToIngredientNestedInput
+}
+
+export type IngredientCreateWithoutRecipeVariantLinksInput = {
+  id?: string
+  ingredientId: string
+  name: string
+  caloriesPer100g: number
+  proteinPer100g: number
+  fatPer100g: number
+  carbohydratesPer100g: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  nativeCountry?: Prisma.CountryCreateNestedOneWithoutIngredientsInput
+  recipeLinks?: Prisma.RecipeIngredientCreateNestedManyWithoutIngredientInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionCreateNestedManyWithoutFromIngredientInput
+  substitutionsTo?: Prisma.IngredientSubstitutionCreateNestedManyWithoutToIngredientInput
+}
+
+export type IngredientUncheckedCreateWithoutRecipeVariantLinksInput = {
+  id?: string
+  ingredientId: string
+  name: string
+  caloriesPer100g: number
+  proteinPer100g: number
+  fatPer100g: number
+  carbohydratesPer100g: number
+  nativeCountryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  recipeLinks?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutIngredientInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutFromIngredientInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutToIngredientInput
+}
+
+export type IngredientCreateOrConnectWithoutRecipeVariantLinksInput = {
+  where: Prisma.IngredientWhereUniqueInput
+  create: Prisma.XOR<Prisma.IngredientCreateWithoutRecipeVariantLinksInput, Prisma.IngredientUncheckedCreateWithoutRecipeVariantLinksInput>
+}
+
+export type IngredientUpsertWithoutRecipeVariantLinksInput = {
+  update: Prisma.XOR<Prisma.IngredientUpdateWithoutRecipeVariantLinksInput, Prisma.IngredientUncheckedUpdateWithoutRecipeVariantLinksInput>
+  create: Prisma.XOR<Prisma.IngredientCreateWithoutRecipeVariantLinksInput, Prisma.IngredientUncheckedCreateWithoutRecipeVariantLinksInput>
+  where?: Prisma.IngredientWhereInput
+}
+
+export type IngredientUpdateToOneWithWhereWithoutRecipeVariantLinksInput = {
+  where?: Prisma.IngredientWhereInput
+  data: Prisma.XOR<Prisma.IngredientUpdateWithoutRecipeVariantLinksInput, Prisma.IngredientUncheckedUpdateWithoutRecipeVariantLinksInput>
+}
+
+export type IngredientUpdateWithoutRecipeVariantLinksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingredientId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  caloriesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  proteinPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  fatPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nativeCountry?: Prisma.CountryUpdateOneWithoutIngredientsNestedInput
+  recipeLinks?: Prisma.RecipeIngredientUpdateManyWithoutIngredientNestedInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUpdateManyWithoutFromIngredientNestedInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUpdateManyWithoutToIngredientNestedInput
+}
+
+export type IngredientUncheckedUpdateWithoutRecipeVariantLinksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingredientId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  caloriesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  proteinPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  fatPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  nativeCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recipeLinks?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutIngredientNestedInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutFromIngredientNestedInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutToIngredientNestedInput
+}
+
+export type IngredientCreateWithoutNativeCountryInput = {
+  id?: string
+  ingredientId: string
+  name: string
+  caloriesPer100g: number
+  proteinPer100g: number
+  fatPer100g: number
+  carbohydratesPer100g: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  recipeLinks?: Prisma.RecipeIngredientCreateNestedManyWithoutIngredientInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientCreateNestedManyWithoutIngredientInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionCreateNestedManyWithoutFromIngredientInput
+  substitutionsTo?: Prisma.IngredientSubstitutionCreateNestedManyWithoutToIngredientInput
+}
+
+export type IngredientUncheckedCreateWithoutNativeCountryInput = {
+  id?: string
+  ingredientId: string
+  name: string
+  caloriesPer100g: number
+  proteinPer100g: number
+  fatPer100g: number
+  carbohydratesPer100g: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  recipeLinks?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutIngredientInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUncheckedCreateNestedManyWithoutIngredientInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutFromIngredientInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutToIngredientInput
+}
+
+export type IngredientCreateOrConnectWithoutNativeCountryInput = {
+  where: Prisma.IngredientWhereUniqueInput
+  create: Prisma.XOR<Prisma.IngredientCreateWithoutNativeCountryInput, Prisma.IngredientUncheckedCreateWithoutNativeCountryInput>
+}
+
+export type IngredientCreateManyNativeCountryInputEnvelope = {
+  data: Prisma.IngredientCreateManyNativeCountryInput | Prisma.IngredientCreateManyNativeCountryInput[]
+  skipDuplicates?: boolean
+}
+
+export type IngredientUpsertWithWhereUniqueWithoutNativeCountryInput = {
+  where: Prisma.IngredientWhereUniqueInput
+  update: Prisma.XOR<Prisma.IngredientUpdateWithoutNativeCountryInput, Prisma.IngredientUncheckedUpdateWithoutNativeCountryInput>
+  create: Prisma.XOR<Prisma.IngredientCreateWithoutNativeCountryInput, Prisma.IngredientUncheckedCreateWithoutNativeCountryInput>
+}
+
+export type IngredientUpdateWithWhereUniqueWithoutNativeCountryInput = {
+  where: Prisma.IngredientWhereUniqueInput
+  data: Prisma.XOR<Prisma.IngredientUpdateWithoutNativeCountryInput, Prisma.IngredientUncheckedUpdateWithoutNativeCountryInput>
+}
+
+export type IngredientUpdateManyWithWhereWithoutNativeCountryInput = {
+  where: Prisma.IngredientScalarWhereInput
+  data: Prisma.XOR<Prisma.IngredientUpdateManyMutationInput, Prisma.IngredientUncheckedUpdateManyWithoutNativeCountryInput>
+}
+
+export type IngredientScalarWhereInput = {
+  AND?: Prisma.IngredientScalarWhereInput | Prisma.IngredientScalarWhereInput[]
+  OR?: Prisma.IngredientScalarWhereInput[]
+  NOT?: Prisma.IngredientScalarWhereInput | Prisma.IngredientScalarWhereInput[]
+  id?: Prisma.StringFilter<"Ingredient"> | string
+  ingredientId?: Prisma.StringFilter<"Ingredient"> | string
+  name?: Prisma.StringFilter<"Ingredient"> | string
+  caloriesPer100g?: Prisma.FloatFilter<"Ingredient"> | number
+  proteinPer100g?: Prisma.FloatFilter<"Ingredient"> | number
+  fatPer100g?: Prisma.FloatFilter<"Ingredient"> | number
+  carbohydratesPer100g?: Prisma.FloatFilter<"Ingredient"> | number
+  nativeCountryId?: Prisma.StringNullableFilter<"Ingredient"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Ingredient"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Ingredient"> | Date | string
+}
+
+export type IngredientCreateManyNativeCountryInput = {
+  id?: string
+  ingredientId: string
+  name: string
+  caloriesPer100g: number
+  proteinPer100g: number
+  fatPer100g: number
+  carbohydratesPer100g: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type IngredientUpdateWithoutNativeCountryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingredientId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  caloriesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  proteinPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  fatPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recipeLinks?: Prisma.RecipeIngredientUpdateManyWithoutIngredientNestedInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUpdateManyWithoutIngredientNestedInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUpdateManyWithoutFromIngredientNestedInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUpdateManyWithoutToIngredientNestedInput
+}
+
+export type IngredientUncheckedUpdateWithoutNativeCountryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingredientId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  caloriesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  proteinPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  fatPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  carbohydratesPer100g?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recipeLinks?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutIngredientNestedInput
+  recipeVariantLinks?: Prisma.RecipeVariantIngredientUncheckedUpdateManyWithoutIngredientNestedInput
+  substitutionsFrom?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutFromIngredientNestedInput
+  substitutionsTo?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutToIngredientNestedInput
+}
+
+export type IngredientUncheckedUpdateManyWithoutNativeCountryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ingredientId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -560,10 +1085,16 @@ export type IngredientUncheckedUpdateWithoutRecipeLinksInput = {
 
 export type IngredientCountOutputType = {
   recipeLinks: number
+  recipeVariantLinks: number
+  substitutionsFrom: number
+  substitutionsTo: number
 }
 
 export type IngredientCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   recipeLinks?: boolean | IngredientCountOutputTypeCountRecipeLinksArgs
+  recipeVariantLinks?: boolean | IngredientCountOutputTypeCountRecipeVariantLinksArgs
+  substitutionsFrom?: boolean | IngredientCountOutputTypeCountSubstitutionsFromArgs
+  substitutionsTo?: boolean | IngredientCountOutputTypeCountSubstitutionsToArgs
 }
 
 /**
@@ -583,6 +1114,27 @@ export type IngredientCountOutputTypeCountRecipeLinksArgs<ExtArgs extends runtim
   where?: Prisma.RecipeIngredientWhereInput
 }
 
+/**
+ * IngredientCountOutputType without action
+ */
+export type IngredientCountOutputTypeCountRecipeVariantLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RecipeVariantIngredientWhereInput
+}
+
+/**
+ * IngredientCountOutputType without action
+ */
+export type IngredientCountOutputTypeCountSubstitutionsFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IngredientSubstitutionWhereInput
+}
+
+/**
+ * IngredientCountOutputType without action
+ */
+export type IngredientCountOutputTypeCountSubstitutionsToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IngredientSubstitutionWhereInput
+}
+
 
 export type IngredientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -592,9 +1144,14 @@ export type IngredientSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   proteinPer100g?: boolean
   fatPer100g?: boolean
   carbohydratesPer100g?: boolean
+  nativeCountryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  nativeCountry?: boolean | Prisma.Ingredient$nativeCountryArgs<ExtArgs>
   recipeLinks?: boolean | Prisma.Ingredient$recipeLinksArgs<ExtArgs>
+  recipeVariantLinks?: boolean | Prisma.Ingredient$recipeVariantLinksArgs<ExtArgs>
+  substitutionsFrom?: boolean | Prisma.Ingredient$substitutionsFromArgs<ExtArgs>
+  substitutionsTo?: boolean | Prisma.Ingredient$substitutionsToArgs<ExtArgs>
   _count?: boolean | Prisma.IngredientCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ingredient"]>
 
@@ -606,8 +1163,10 @@ export type IngredientSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   proteinPer100g?: boolean
   fatPer100g?: boolean
   carbohydratesPer100g?: boolean
+  nativeCountryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  nativeCountry?: boolean | Prisma.Ingredient$nativeCountryArgs<ExtArgs>
 }, ExtArgs["result"]["ingredient"]>
 
 export type IngredientSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -618,8 +1177,10 @@ export type IngredientSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   proteinPer100g?: boolean
   fatPer100g?: boolean
   carbohydratesPer100g?: boolean
+  nativeCountryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  nativeCountry?: boolean | Prisma.Ingredient$nativeCountryArgs<ExtArgs>
 }, ExtArgs["result"]["ingredient"]>
 
 export type IngredientSelectScalar = {
@@ -630,22 +1191,35 @@ export type IngredientSelectScalar = {
   proteinPer100g?: boolean
   fatPer100g?: boolean
   carbohydratesPer100g?: boolean
+  nativeCountryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type IngredientOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ingredientId" | "name" | "caloriesPer100g" | "proteinPer100g" | "fatPer100g" | "carbohydratesPer100g" | "createdAt" | "updatedAt", ExtArgs["result"]["ingredient"]>
+export type IngredientOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ingredientId" | "name" | "caloriesPer100g" | "proteinPer100g" | "fatPer100g" | "carbohydratesPer100g" | "nativeCountryId" | "createdAt" | "updatedAt", ExtArgs["result"]["ingredient"]>
 export type IngredientInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  nativeCountry?: boolean | Prisma.Ingredient$nativeCountryArgs<ExtArgs>
   recipeLinks?: boolean | Prisma.Ingredient$recipeLinksArgs<ExtArgs>
+  recipeVariantLinks?: boolean | Prisma.Ingredient$recipeVariantLinksArgs<ExtArgs>
+  substitutionsFrom?: boolean | Prisma.Ingredient$substitutionsFromArgs<ExtArgs>
+  substitutionsTo?: boolean | Prisma.Ingredient$substitutionsToArgs<ExtArgs>
   _count?: boolean | Prisma.IngredientCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type IngredientIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type IngredientIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type IngredientIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  nativeCountry?: boolean | Prisma.Ingredient$nativeCountryArgs<ExtArgs>
+}
+export type IngredientIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  nativeCountry?: boolean | Prisma.Ingredient$nativeCountryArgs<ExtArgs>
+}
 
 export type $IngredientPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Ingredient"
   objects: {
+    nativeCountry: Prisma.$CountryPayload<ExtArgs> | null
     recipeLinks: Prisma.$RecipeIngredientPayload<ExtArgs>[]
+    recipeVariantLinks: Prisma.$RecipeVariantIngredientPayload<ExtArgs>[]
+    substitutionsFrom: Prisma.$IngredientSubstitutionPayload<ExtArgs>[]
+    substitutionsTo: Prisma.$IngredientSubstitutionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -655,6 +1229,7 @@ export type $IngredientPayload<ExtArgs extends runtime.Types.Extensions.Internal
     proteinPer100g: number
     fatPer100g: number
     carbohydratesPer100g: number
+    nativeCountryId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["ingredient"]>
@@ -1051,7 +1626,11 @@ readonly fields: IngredientFieldRefs;
  */
 export interface Prisma__IngredientClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  nativeCountry<T extends Prisma.Ingredient$nativeCountryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ingredient$nativeCountryArgs<ExtArgs>>): Prisma.Prisma__CountryClient<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   recipeLinks<T extends Prisma.Ingredient$recipeLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ingredient$recipeLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecipeIngredientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  recipeVariantLinks<T extends Prisma.Ingredient$recipeVariantLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ingredient$recipeVariantLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecipeVariantIngredientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  substitutionsFrom<T extends Prisma.Ingredient$substitutionsFromArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ingredient$substitutionsFromArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  substitutionsTo<T extends Prisma.Ingredient$substitutionsToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ingredient$substitutionsToArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1088,6 +1667,7 @@ export interface IngredientFieldRefs {
   readonly proteinPer100g: Prisma.FieldRef<"Ingredient", 'Float'>
   readonly fatPer100g: Prisma.FieldRef<"Ingredient", 'Float'>
   readonly carbohydratesPer100g: Prisma.FieldRef<"Ingredient", 'Float'>
+  readonly nativeCountryId: Prisma.FieldRef<"Ingredient", 'String'>
   readonly createdAt: Prisma.FieldRef<"Ingredient", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Ingredient", 'DateTime'>
 }
@@ -1344,6 +1924,10 @@ export type IngredientCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    */
   data: Prisma.IngredientCreateManyInput | Prisma.IngredientCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IngredientIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1414,6 +1998,10 @@ export type IngredientUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * Limit how many Ingredients to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IngredientIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1483,6 +2071,25 @@ export type IngredientDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
+ * Ingredient.nativeCountry
+ */
+export type Ingredient$nativeCountryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Country
+   */
+  select?: Prisma.CountrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Country
+   */
+  omit?: Prisma.CountryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CountryInclude<ExtArgs> | null
+  where?: Prisma.CountryWhereInput
+}
+
+/**
  * Ingredient.recipeLinks
  */
 export type Ingredient$recipeLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1504,6 +2111,78 @@ export type Ingredient$recipeLinksArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.RecipeIngredientScalarFieldEnum | Prisma.RecipeIngredientScalarFieldEnum[]
+}
+
+/**
+ * Ingredient.recipeVariantLinks
+ */
+export type Ingredient$recipeVariantLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RecipeVariantIngredient
+   */
+  select?: Prisma.RecipeVariantIngredientSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RecipeVariantIngredient
+   */
+  omit?: Prisma.RecipeVariantIngredientOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RecipeVariantIngredientInclude<ExtArgs> | null
+  where?: Prisma.RecipeVariantIngredientWhereInput
+  orderBy?: Prisma.RecipeVariantIngredientOrderByWithRelationInput | Prisma.RecipeVariantIngredientOrderByWithRelationInput[]
+  cursor?: Prisma.RecipeVariantIngredientWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RecipeVariantIngredientScalarFieldEnum | Prisma.RecipeVariantIngredientScalarFieldEnum[]
+}
+
+/**
+ * Ingredient.substitutionsFrom
+ */
+export type Ingredient$substitutionsFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the IngredientSubstitution
+   */
+  select?: Prisma.IngredientSubstitutionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the IngredientSubstitution
+   */
+  omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IngredientSubstitutionInclude<ExtArgs> | null
+  where?: Prisma.IngredientSubstitutionWhereInput
+  orderBy?: Prisma.IngredientSubstitutionOrderByWithRelationInput | Prisma.IngredientSubstitutionOrderByWithRelationInput[]
+  cursor?: Prisma.IngredientSubstitutionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IngredientSubstitutionScalarFieldEnum | Prisma.IngredientSubstitutionScalarFieldEnum[]
+}
+
+/**
+ * Ingredient.substitutionsTo
+ */
+export type Ingredient$substitutionsToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the IngredientSubstitution
+   */
+  select?: Prisma.IngredientSubstitutionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the IngredientSubstitution
+   */
+  omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IngredientSubstitutionInclude<ExtArgs> | null
+  where?: Prisma.IngredientSubstitutionWhereInput
+  orderBy?: Prisma.IngredientSubstitutionOrderByWithRelationInput | Prisma.IngredientSubstitutionOrderByWithRelationInput[]
+  cursor?: Prisma.IngredientSubstitutionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IngredientSubstitutionScalarFieldEnum | Prisma.IngredientSubstitutionScalarFieldEnum[]
 }
 
 /**
