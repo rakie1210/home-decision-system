@@ -28,12 +28,12 @@ export type AggregateIngredientSubstitution = {
 
 export type IngredientSubstitutionAvgAggregateOutputType = {
   ratio: number | null
-  confidence: number | null
+  qualityScore: number | null
 }
 
 export type IngredientSubstitutionSumAggregateOutputType = {
   ratio: number | null
-  confidence: number | null
+  qualityScore: number | null
 }
 
 export type IngredientSubstitutionMinAggregateOutputType = {
@@ -42,8 +42,8 @@ export type IngredientSubstitutionMinAggregateOutputType = {
   toIngredientId: string | null
   countryId: string | null
   ratio: number | null
-  notes: string | null
-  confidence: number | null
+  usageNotes: string | null
+  qualityScore: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -54,8 +54,8 @@ export type IngredientSubstitutionMaxAggregateOutputType = {
   toIngredientId: string | null
   countryId: string | null
   ratio: number | null
-  notes: string | null
-  confidence: number | null
+  usageNotes: string | null
+  qualityScore: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,8 +66,8 @@ export type IngredientSubstitutionCountAggregateOutputType = {
   toIngredientId: number
   countryId: number
   ratio: number
-  notes: number
-  confidence: number
+  usageNotes: number
+  qualityScore: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -76,12 +76,12 @@ export type IngredientSubstitutionCountAggregateOutputType = {
 
 export type IngredientSubstitutionAvgAggregateInputType = {
   ratio?: true
-  confidence?: true
+  qualityScore?: true
 }
 
 export type IngredientSubstitutionSumAggregateInputType = {
   ratio?: true
-  confidence?: true
+  qualityScore?: true
 }
 
 export type IngredientSubstitutionMinAggregateInputType = {
@@ -90,8 +90,8 @@ export type IngredientSubstitutionMinAggregateInputType = {
   toIngredientId?: true
   countryId?: true
   ratio?: true
-  notes?: true
-  confidence?: true
+  usageNotes?: true
+  qualityScore?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -102,8 +102,8 @@ export type IngredientSubstitutionMaxAggregateInputType = {
   toIngredientId?: true
   countryId?: true
   ratio?: true
-  notes?: true
-  confidence?: true
+  usageNotes?: true
+  qualityScore?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -114,8 +114,8 @@ export type IngredientSubstitutionCountAggregateInputType = {
   toIngredientId?: true
   countryId?: true
   ratio?: true
-  notes?: true
-  confidence?: true
+  usageNotes?: true
+  qualityScore?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -211,10 +211,10 @@ export type IngredientSubstitutionGroupByOutputType = {
   id: string
   fromIngredientId: string
   toIngredientId: string
-  countryId: string | null
-  ratio: number
-  notes: string | null
-  confidence: number | null
+  countryId: string
+  ratio: number | null
+  usageNotes: string | null
+  qualityScore: number | null
   createdAt: Date
   updatedAt: Date
   _count: IngredientSubstitutionCountAggregateOutputType | null
@@ -246,25 +246,25 @@ export type IngredientSubstitutionWhereInput = {
   id?: Prisma.StringFilter<"IngredientSubstitution"> | string
   fromIngredientId?: Prisma.StringFilter<"IngredientSubstitution"> | string
   toIngredientId?: Prisma.StringFilter<"IngredientSubstitution"> | string
-  countryId?: Prisma.StringNullableFilter<"IngredientSubstitution"> | string | null
-  ratio?: Prisma.FloatFilter<"IngredientSubstitution"> | number
-  notes?: Prisma.StringNullableFilter<"IngredientSubstitution"> | string | null
-  confidence?: Prisma.FloatNullableFilter<"IngredientSubstitution"> | number | null
+  countryId?: Prisma.StringFilter<"IngredientSubstitution"> | string
+  ratio?: Prisma.FloatNullableFilter<"IngredientSubstitution"> | number | null
+  usageNotes?: Prisma.StringNullableFilter<"IngredientSubstitution"> | string | null
+  qualityScore?: Prisma.IntNullableFilter<"IngredientSubstitution"> | number | null
   createdAt?: Prisma.DateTimeFilter<"IngredientSubstitution"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"IngredientSubstitution"> | Date | string
   fromIngredient?: Prisma.XOR<Prisma.IngredientScalarRelationFilter, Prisma.IngredientWhereInput>
   toIngredient?: Prisma.XOR<Prisma.IngredientScalarRelationFilter, Prisma.IngredientWhereInput>
-  country?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
+  country?: Prisma.XOR<Prisma.CountryScalarRelationFilter, Prisma.CountryWhereInput>
 }
 
 export type IngredientSubstitutionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   fromIngredientId?: Prisma.SortOrder
   toIngredientId?: Prisma.SortOrder
-  countryId?: Prisma.SortOrderInput | Prisma.SortOrder
-  ratio?: Prisma.SortOrder
-  notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  confidence?: Prisma.SortOrderInput | Prisma.SortOrder
+  countryId?: Prisma.SortOrder
+  ratio?: Prisma.SortOrderInput | Prisma.SortOrder
+  usageNotes?: Prisma.SortOrderInput | Prisma.SortOrder
+  qualityScore?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   fromIngredient?: Prisma.IngredientOrderByWithRelationInput
@@ -280,25 +280,25 @@ export type IngredientSubstitutionWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.IngredientSubstitutionWhereInput | Prisma.IngredientSubstitutionWhereInput[]
   fromIngredientId?: Prisma.StringFilter<"IngredientSubstitution"> | string
   toIngredientId?: Prisma.StringFilter<"IngredientSubstitution"> | string
-  countryId?: Prisma.StringNullableFilter<"IngredientSubstitution"> | string | null
-  ratio?: Prisma.FloatFilter<"IngredientSubstitution"> | number
-  notes?: Prisma.StringNullableFilter<"IngredientSubstitution"> | string | null
-  confidence?: Prisma.FloatNullableFilter<"IngredientSubstitution"> | number | null
+  countryId?: Prisma.StringFilter<"IngredientSubstitution"> | string
+  ratio?: Prisma.FloatNullableFilter<"IngredientSubstitution"> | number | null
+  usageNotes?: Prisma.StringNullableFilter<"IngredientSubstitution"> | string | null
+  qualityScore?: Prisma.IntNullableFilter<"IngredientSubstitution"> | number | null
   createdAt?: Prisma.DateTimeFilter<"IngredientSubstitution"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"IngredientSubstitution"> | Date | string
   fromIngredient?: Prisma.XOR<Prisma.IngredientScalarRelationFilter, Prisma.IngredientWhereInput>
   toIngredient?: Prisma.XOR<Prisma.IngredientScalarRelationFilter, Prisma.IngredientWhereInput>
-  country?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
+  country?: Prisma.XOR<Prisma.CountryScalarRelationFilter, Prisma.CountryWhereInput>
 }, "id" | "fromIngredientId_toIngredientId_countryId">
 
 export type IngredientSubstitutionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   fromIngredientId?: Prisma.SortOrder
   toIngredientId?: Prisma.SortOrder
-  countryId?: Prisma.SortOrderInput | Prisma.SortOrder
-  ratio?: Prisma.SortOrder
-  notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  confidence?: Prisma.SortOrderInput | Prisma.SortOrder
+  countryId?: Prisma.SortOrder
+  ratio?: Prisma.SortOrderInput | Prisma.SortOrder
+  usageNotes?: Prisma.SortOrderInput | Prisma.SortOrder
+  qualityScore?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.IngredientSubstitutionCountOrderByAggregateInput
@@ -315,58 +315,58 @@ export type IngredientSubstitutionScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"IngredientSubstitution"> | string
   fromIngredientId?: Prisma.StringWithAggregatesFilter<"IngredientSubstitution"> | string
   toIngredientId?: Prisma.StringWithAggregatesFilter<"IngredientSubstitution"> | string
-  countryId?: Prisma.StringNullableWithAggregatesFilter<"IngredientSubstitution"> | string | null
-  ratio?: Prisma.FloatWithAggregatesFilter<"IngredientSubstitution"> | number
-  notes?: Prisma.StringNullableWithAggregatesFilter<"IngredientSubstitution"> | string | null
-  confidence?: Prisma.FloatNullableWithAggregatesFilter<"IngredientSubstitution"> | number | null
+  countryId?: Prisma.StringWithAggregatesFilter<"IngredientSubstitution"> | string
+  ratio?: Prisma.FloatNullableWithAggregatesFilter<"IngredientSubstitution"> | number | null
+  usageNotes?: Prisma.StringNullableWithAggregatesFilter<"IngredientSubstitution"> | string | null
+  qualityScore?: Prisma.IntNullableWithAggregatesFilter<"IngredientSubstitution"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"IngredientSubstitution"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"IngredientSubstitution"> | Date | string
 }
 
 export type IngredientSubstitutionCreateInput = {
   id?: string
-  ratio?: number
-  notes?: string | null
-  confidence?: number | null
+  ratio?: number | null
+  usageNotes?: string | null
+  qualityScore?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   fromIngredient: Prisma.IngredientCreateNestedOneWithoutSubstitutionsFromInput
   toIngredient: Prisma.IngredientCreateNestedOneWithoutSubstitutionsToInput
-  country?: Prisma.CountryCreateNestedOneWithoutIngredientSubstitutionsInput
+  country: Prisma.CountryCreateNestedOneWithoutIngredientSubstitutionsInput
 }
 
 export type IngredientSubstitutionUncheckedCreateInput = {
   id?: string
   fromIngredientId: string
   toIngredientId: string
-  countryId?: string | null
-  ratio?: number
-  notes?: string | null
-  confidence?: number | null
+  countryId: string
+  ratio?: number | null
+  usageNotes?: string | null
+  qualityScore?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type IngredientSubstitutionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fromIngredient?: Prisma.IngredientUpdateOneRequiredWithoutSubstitutionsFromNestedInput
   toIngredient?: Prisma.IngredientUpdateOneRequiredWithoutSubstitutionsToNestedInput
-  country?: Prisma.CountryUpdateOneWithoutIngredientSubstitutionsNestedInput
+  country?: Prisma.CountryUpdateOneRequiredWithoutIngredientSubstitutionsNestedInput
 }
 
 export type IngredientSubstitutionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fromIngredientId?: Prisma.StringFieldUpdateOperationsInput | string
   toIngredientId?: Prisma.StringFieldUpdateOperationsInput | string
-  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -375,19 +375,19 @@ export type IngredientSubstitutionCreateManyInput = {
   id?: string
   fromIngredientId: string
   toIngredientId: string
-  countryId?: string | null
-  ratio?: number
-  notes?: string | null
-  confidence?: number | null
+  countryId: string
+  ratio?: number | null
+  usageNotes?: string | null
+  qualityScore?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type IngredientSubstitutionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -396,10 +396,10 @@ export type IngredientSubstitutionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fromIngredientId?: Prisma.StringFieldUpdateOperationsInput | string
   toIngredientId?: Prisma.StringFieldUpdateOperationsInput | string
-  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -426,15 +426,15 @@ export type IngredientSubstitutionCountOrderByAggregateInput = {
   toIngredientId?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
   ratio?: Prisma.SortOrder
-  notes?: Prisma.SortOrder
-  confidence?: Prisma.SortOrder
+  usageNotes?: Prisma.SortOrder
+  qualityScore?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type IngredientSubstitutionAvgOrderByAggregateInput = {
   ratio?: Prisma.SortOrder
-  confidence?: Prisma.SortOrder
+  qualityScore?: Prisma.SortOrder
 }
 
 export type IngredientSubstitutionMaxOrderByAggregateInput = {
@@ -443,8 +443,8 @@ export type IngredientSubstitutionMaxOrderByAggregateInput = {
   toIngredientId?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
   ratio?: Prisma.SortOrder
-  notes?: Prisma.SortOrder
-  confidence?: Prisma.SortOrder
+  usageNotes?: Prisma.SortOrder
+  qualityScore?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -455,15 +455,15 @@ export type IngredientSubstitutionMinOrderByAggregateInput = {
   toIngredientId?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
   ratio?: Prisma.SortOrder
-  notes?: Prisma.SortOrder
-  confidence?: Prisma.SortOrder
+  usageNotes?: Prisma.SortOrder
+  qualityScore?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type IngredientSubstitutionSumOrderByAggregateInput = {
   ratio?: Prisma.SortOrder
-  confidence?: Prisma.SortOrder
+  qualityScore?: Prisma.SortOrder
 }
 
 export type IngredientSubstitutionCreateNestedManyWithoutFromIngredientInput = {
@@ -550,14 +550,6 @@ export type IngredientSubstitutionUncheckedUpdateManyWithoutToIngredientNestedIn
   deleteMany?: Prisma.IngredientSubstitutionScalarWhereInput | Prisma.IngredientSubstitutionScalarWhereInput[]
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type IngredientSubstitutionCreateNestedManyWithoutCountryInput = {
   create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutCountryInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutCountryInput> | Prisma.IngredientSubstitutionCreateWithoutCountryInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutCountryInput[]
   connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutCountryInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutCountryInput[]
@@ -602,22 +594,22 @@ export type IngredientSubstitutionUncheckedUpdateManyWithoutCountryNestedInput =
 
 export type IngredientSubstitutionCreateWithoutFromIngredientInput = {
   id?: string
-  ratio?: number
-  notes?: string | null
-  confidence?: number | null
+  ratio?: number | null
+  usageNotes?: string | null
+  qualityScore?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   toIngredient: Prisma.IngredientCreateNestedOneWithoutSubstitutionsToInput
-  country?: Prisma.CountryCreateNestedOneWithoutIngredientSubstitutionsInput
+  country: Prisma.CountryCreateNestedOneWithoutIngredientSubstitutionsInput
 }
 
 export type IngredientSubstitutionUncheckedCreateWithoutFromIngredientInput = {
   id?: string
   toIngredientId: string
-  countryId?: string | null
-  ratio?: number
-  notes?: string | null
-  confidence?: number | null
+  countryId: string
+  ratio?: number | null
+  usageNotes?: string | null
+  qualityScore?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -634,22 +626,22 @@ export type IngredientSubstitutionCreateManyFromIngredientInputEnvelope = {
 
 export type IngredientSubstitutionCreateWithoutToIngredientInput = {
   id?: string
-  ratio?: number
-  notes?: string | null
-  confidence?: number | null
+  ratio?: number | null
+  usageNotes?: string | null
+  qualityScore?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   fromIngredient: Prisma.IngredientCreateNestedOneWithoutSubstitutionsFromInput
-  country?: Prisma.CountryCreateNestedOneWithoutIngredientSubstitutionsInput
+  country: Prisma.CountryCreateNestedOneWithoutIngredientSubstitutionsInput
 }
 
 export type IngredientSubstitutionUncheckedCreateWithoutToIngredientInput = {
   id?: string
   fromIngredientId: string
-  countryId?: string | null
-  ratio?: number
-  notes?: string | null
-  confidence?: number | null
+  countryId: string
+  ratio?: number | null
+  usageNotes?: string | null
+  qualityScore?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -687,10 +679,10 @@ export type IngredientSubstitutionScalarWhereInput = {
   id?: Prisma.StringFilter<"IngredientSubstitution"> | string
   fromIngredientId?: Prisma.StringFilter<"IngredientSubstitution"> | string
   toIngredientId?: Prisma.StringFilter<"IngredientSubstitution"> | string
-  countryId?: Prisma.StringNullableFilter<"IngredientSubstitution"> | string | null
-  ratio?: Prisma.FloatFilter<"IngredientSubstitution"> | number
-  notes?: Prisma.StringNullableFilter<"IngredientSubstitution"> | string | null
-  confidence?: Prisma.FloatNullableFilter<"IngredientSubstitution"> | number | null
+  countryId?: Prisma.StringFilter<"IngredientSubstitution"> | string
+  ratio?: Prisma.FloatNullableFilter<"IngredientSubstitution"> | number | null
+  usageNotes?: Prisma.StringNullableFilter<"IngredientSubstitution"> | string | null
+  qualityScore?: Prisma.IntNullableFilter<"IngredientSubstitution"> | number | null
   createdAt?: Prisma.DateTimeFilter<"IngredientSubstitution"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"IngredientSubstitution"> | Date | string
 }
@@ -713,9 +705,9 @@ export type IngredientSubstitutionUpdateManyWithWhereWithoutToIngredientInput = 
 
 export type IngredientSubstitutionCreateWithoutCountryInput = {
   id?: string
-  ratio?: number
-  notes?: string | null
-  confidence?: number | null
+  ratio?: number | null
+  usageNotes?: string | null
+  qualityScore?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   fromIngredient: Prisma.IngredientCreateNestedOneWithoutSubstitutionsFromInput
@@ -726,9 +718,9 @@ export type IngredientSubstitutionUncheckedCreateWithoutCountryInput = {
   id?: string
   fromIngredientId: string
   toIngredientId: string
-  ratio?: number
-  notes?: string | null
-  confidence?: number | null
+  ratio?: number | null
+  usageNotes?: string | null
+  qualityScore?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -762,10 +754,10 @@ export type IngredientSubstitutionUpdateManyWithWhereWithoutCountryInput = {
 export type IngredientSubstitutionCreateManyFromIngredientInput = {
   id?: string
   toIngredientId: string
-  countryId?: string | null
-  ratio?: number
-  notes?: string | null
-  confidence?: number | null
+  countryId: string
+  ratio?: number | null
+  usageNotes?: string | null
+  qualityScore?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -773,32 +765,32 @@ export type IngredientSubstitutionCreateManyFromIngredientInput = {
 export type IngredientSubstitutionCreateManyToIngredientInput = {
   id?: string
   fromIngredientId: string
-  countryId?: string | null
-  ratio?: number
-  notes?: string | null
-  confidence?: number | null
+  countryId: string
+  ratio?: number | null
+  usageNotes?: string | null
+  qualityScore?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type IngredientSubstitutionUpdateWithoutFromIngredientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   toIngredient?: Prisma.IngredientUpdateOneRequiredWithoutSubstitutionsToNestedInput
-  country?: Prisma.CountryUpdateOneWithoutIngredientSubstitutionsNestedInput
+  country?: Prisma.CountryUpdateOneRequiredWithoutIngredientSubstitutionsNestedInput
 }
 
 export type IngredientSubstitutionUncheckedUpdateWithoutFromIngredientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   toIngredientId?: Prisma.StringFieldUpdateOperationsInput | string
-  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -806,32 +798,32 @@ export type IngredientSubstitutionUncheckedUpdateWithoutFromIngredientInput = {
 export type IngredientSubstitutionUncheckedUpdateManyWithoutFromIngredientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   toIngredientId?: Prisma.StringFieldUpdateOperationsInput | string
-  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type IngredientSubstitutionUpdateWithoutToIngredientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fromIngredient?: Prisma.IngredientUpdateOneRequiredWithoutSubstitutionsFromNestedInput
-  country?: Prisma.CountryUpdateOneWithoutIngredientSubstitutionsNestedInput
+  country?: Prisma.CountryUpdateOneRequiredWithoutIngredientSubstitutionsNestedInput
 }
 
 export type IngredientSubstitutionUncheckedUpdateWithoutToIngredientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fromIngredientId?: Prisma.StringFieldUpdateOperationsInput | string
-  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -839,10 +831,10 @@ export type IngredientSubstitutionUncheckedUpdateWithoutToIngredientInput = {
 export type IngredientSubstitutionUncheckedUpdateManyWithoutToIngredientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fromIngredientId?: Prisma.StringFieldUpdateOperationsInput | string
-  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  countryId?: Prisma.StringFieldUpdateOperationsInput | string
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -851,18 +843,18 @@ export type IngredientSubstitutionCreateManyCountryInput = {
   id?: string
   fromIngredientId: string
   toIngredientId: string
-  ratio?: number
-  notes?: string | null
-  confidence?: number | null
+  ratio?: number | null
+  usageNotes?: string | null
+  qualityScore?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type IngredientSubstitutionUpdateWithoutCountryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fromIngredient?: Prisma.IngredientUpdateOneRequiredWithoutSubstitutionsFromNestedInput
@@ -873,9 +865,9 @@ export type IngredientSubstitutionUncheckedUpdateWithoutCountryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fromIngredientId?: Prisma.StringFieldUpdateOperationsInput | string
   toIngredientId?: Prisma.StringFieldUpdateOperationsInput | string
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -884,9 +876,9 @@ export type IngredientSubstitutionUncheckedUpdateManyWithoutCountryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fromIngredientId?: Prisma.StringFieldUpdateOperationsInput | string
   toIngredientId?: Prisma.StringFieldUpdateOperationsInput | string
-  ratio?: Prisma.FloatFieldUpdateOperationsInput | number
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -899,13 +891,13 @@ export type IngredientSubstitutionSelect<ExtArgs extends runtime.Types.Extension
   toIngredientId?: boolean
   countryId?: boolean
   ratio?: boolean
-  notes?: boolean
-  confidence?: boolean
+  usageNotes?: boolean
+  qualityScore?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   fromIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>
   toIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>
-  country?: boolean | Prisma.IngredientSubstitution$countryArgs<ExtArgs>
+  country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ingredientSubstitution"]>
 
 export type IngredientSubstitutionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -914,13 +906,13 @@ export type IngredientSubstitutionSelectCreateManyAndReturn<ExtArgs extends runt
   toIngredientId?: boolean
   countryId?: boolean
   ratio?: boolean
-  notes?: boolean
-  confidence?: boolean
+  usageNotes?: boolean
+  qualityScore?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   fromIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>
   toIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>
-  country?: boolean | Prisma.IngredientSubstitution$countryArgs<ExtArgs>
+  country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ingredientSubstitution"]>
 
 export type IngredientSubstitutionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -929,13 +921,13 @@ export type IngredientSubstitutionSelectUpdateManyAndReturn<ExtArgs extends runt
   toIngredientId?: boolean
   countryId?: boolean
   ratio?: boolean
-  notes?: boolean
-  confidence?: boolean
+  usageNotes?: boolean
+  qualityScore?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   fromIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>
   toIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>
-  country?: boolean | Prisma.IngredientSubstitution$countryArgs<ExtArgs>
+  country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ingredientSubstitution"]>
 
 export type IngredientSubstitutionSelectScalar = {
@@ -944,27 +936,27 @@ export type IngredientSubstitutionSelectScalar = {
   toIngredientId?: boolean
   countryId?: boolean
   ratio?: boolean
-  notes?: boolean
-  confidence?: boolean
+  usageNotes?: boolean
+  qualityScore?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type IngredientSubstitutionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fromIngredientId" | "toIngredientId" | "countryId" | "ratio" | "notes" | "confidence" | "createdAt" | "updatedAt", ExtArgs["result"]["ingredientSubstitution"]>
+export type IngredientSubstitutionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fromIngredientId" | "toIngredientId" | "countryId" | "ratio" | "usageNotes" | "qualityScore" | "createdAt" | "updatedAt", ExtArgs["result"]["ingredientSubstitution"]>
 export type IngredientSubstitutionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fromIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>
   toIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>
-  country?: boolean | Prisma.IngredientSubstitution$countryArgs<ExtArgs>
+  country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
 }
 export type IngredientSubstitutionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fromIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>
   toIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>
-  country?: boolean | Prisma.IngredientSubstitution$countryArgs<ExtArgs>
+  country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
 }
 export type IngredientSubstitutionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fromIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>
   toIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>
-  country?: boolean | Prisma.IngredientSubstitution$countryArgs<ExtArgs>
+  country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>
 }
 
 export type $IngredientSubstitutionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -972,16 +964,16 @@ export type $IngredientSubstitutionPayload<ExtArgs extends runtime.Types.Extensi
   objects: {
     fromIngredient: Prisma.$IngredientPayload<ExtArgs>
     toIngredient: Prisma.$IngredientPayload<ExtArgs>
-    country: Prisma.$CountryPayload<ExtArgs> | null
+    country: Prisma.$CountryPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     fromIngredientId: string
     toIngredientId: string
-    countryId: string | null
-    ratio: number
-    notes: string | null
-    confidence: number | null
+    countryId: string
+    ratio: number | null
+    usageNotes: string | null
+    qualityScore: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["ingredientSubstitution"]>
@@ -1380,7 +1372,7 @@ export interface Prisma__IngredientSubstitutionClient<T, Null = never, ExtArgs e
   readonly [Symbol.toStringTag]: "PrismaPromise"
   fromIngredient<T extends Prisma.IngredientDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IngredientDefaultArgs<ExtArgs>>): Prisma.Prisma__IngredientClient<runtime.Types.Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   toIngredient<T extends Prisma.IngredientDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IngredientDefaultArgs<ExtArgs>>): Prisma.Prisma__IngredientClient<runtime.Types.Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  country<T extends Prisma.IngredientSubstitution$countryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IngredientSubstitution$countryArgs<ExtArgs>>): Prisma.Prisma__CountryClient<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  country<T extends Prisma.CountryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CountryDefaultArgs<ExtArgs>>): Prisma.Prisma__CountryClient<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1415,8 +1407,8 @@ export interface IngredientSubstitutionFieldRefs {
   readonly toIngredientId: Prisma.FieldRef<"IngredientSubstitution", 'String'>
   readonly countryId: Prisma.FieldRef<"IngredientSubstitution", 'String'>
   readonly ratio: Prisma.FieldRef<"IngredientSubstitution", 'Float'>
-  readonly notes: Prisma.FieldRef<"IngredientSubstitution", 'String'>
-  readonly confidence: Prisma.FieldRef<"IngredientSubstitution", 'Float'>
+  readonly usageNotes: Prisma.FieldRef<"IngredientSubstitution", 'String'>
+  readonly qualityScore: Prisma.FieldRef<"IngredientSubstitution", 'Int'>
   readonly createdAt: Prisma.FieldRef<"IngredientSubstitution", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"IngredientSubstitution", 'DateTime'>
 }
@@ -1817,25 +1809,6 @@ export type IngredientSubstitutionDeleteManyArgs<ExtArgs extends runtime.Types.E
    * Limit how many IngredientSubstitutions to delete.
    */
   limit?: number
-}
-
-/**
- * IngredientSubstitution.country
- */
-export type IngredientSubstitution$countryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Country
-   */
-  select?: Prisma.CountrySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Country
-   */
-  omit?: Prisma.CountryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CountryInclude<ExtArgs> | null
-  where?: Prisma.CountryWhereInput
 }
 
 /**

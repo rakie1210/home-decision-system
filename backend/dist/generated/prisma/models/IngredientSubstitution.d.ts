@@ -1,0 +1,1624 @@
+import type * as runtime from "@prisma/client/runtime/client";
+import type * as Prisma from "../internal/prismaNamespace";
+/**
+ * Model IngredientSubstitution
+ *
+ */
+export type IngredientSubstitutionModel = runtime.Types.Result.DefaultSelection<Prisma.$IngredientSubstitutionPayload>;
+export type AggregateIngredientSubstitution = {
+    _count: IngredientSubstitutionCountAggregateOutputType | null;
+    _avg: IngredientSubstitutionAvgAggregateOutputType | null;
+    _sum: IngredientSubstitutionSumAggregateOutputType | null;
+    _min: IngredientSubstitutionMinAggregateOutputType | null;
+    _max: IngredientSubstitutionMaxAggregateOutputType | null;
+};
+export type IngredientSubstitutionAvgAggregateOutputType = {
+    ratio: number | null;
+    qualityScore: number | null;
+};
+export type IngredientSubstitutionSumAggregateOutputType = {
+    ratio: number | null;
+    qualityScore: number | null;
+};
+export type IngredientSubstitutionMinAggregateOutputType = {
+    id: string | null;
+    fromIngredientId: string | null;
+    toIngredientId: string | null;
+    countryId: string | null;
+    ratio: number | null;
+    usageNotes: string | null;
+    qualityScore: number | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+};
+export type IngredientSubstitutionMaxAggregateOutputType = {
+    id: string | null;
+    fromIngredientId: string | null;
+    toIngredientId: string | null;
+    countryId: string | null;
+    ratio: number | null;
+    usageNotes: string | null;
+    qualityScore: number | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+};
+export type IngredientSubstitutionCountAggregateOutputType = {
+    id: number;
+    fromIngredientId: number;
+    toIngredientId: number;
+    countryId: number;
+    ratio: number;
+    usageNotes: number;
+    qualityScore: number;
+    createdAt: number;
+    updatedAt: number;
+    _all: number;
+};
+export type IngredientSubstitutionAvgAggregateInputType = {
+    ratio?: true;
+    qualityScore?: true;
+};
+export type IngredientSubstitutionSumAggregateInputType = {
+    ratio?: true;
+    qualityScore?: true;
+};
+export type IngredientSubstitutionMinAggregateInputType = {
+    id?: true;
+    fromIngredientId?: true;
+    toIngredientId?: true;
+    countryId?: true;
+    ratio?: true;
+    usageNotes?: true;
+    qualityScore?: true;
+    createdAt?: true;
+    updatedAt?: true;
+};
+export type IngredientSubstitutionMaxAggregateInputType = {
+    id?: true;
+    fromIngredientId?: true;
+    toIngredientId?: true;
+    countryId?: true;
+    ratio?: true;
+    usageNotes?: true;
+    qualityScore?: true;
+    createdAt?: true;
+    updatedAt?: true;
+};
+export type IngredientSubstitutionCountAggregateInputType = {
+    id?: true;
+    fromIngredientId?: true;
+    toIngredientId?: true;
+    countryId?: true;
+    ratio?: true;
+    usageNotes?: true;
+    qualityScore?: true;
+    createdAt?: true;
+    updatedAt?: true;
+    _all?: true;
+};
+export type IngredientSubstitutionAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which IngredientSubstitution to aggregate.
+     */
+    where?: Prisma.IngredientSubstitutionWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of IngredientSubstitutions to fetch.
+     */
+    orderBy?: Prisma.IngredientSubstitutionOrderByWithRelationInput | Prisma.IngredientSubstitutionOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: Prisma.IngredientSubstitutionWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` IngredientSubstitutions from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` IngredientSubstitutions.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned IngredientSubstitutions
+    **/
+    _count?: true | IngredientSubstitutionCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+    **/
+    _avg?: IngredientSubstitutionAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+    **/
+    _sum?: IngredientSubstitutionSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+    **/
+    _min?: IngredientSubstitutionMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+    **/
+    _max?: IngredientSubstitutionMaxAggregateInputType;
+};
+export type GetIngredientSubstitutionAggregateType<T extends IngredientSubstitutionAggregateArgs> = {
+    [P in keyof T & keyof AggregateIngredientSubstitution]: P extends '_count' | 'count' ? T[P] extends true ? number : Prisma.GetScalarType<T[P], AggregateIngredientSubstitution[P]> : Prisma.GetScalarType<T[P], AggregateIngredientSubstitution[P]>;
+};
+export type IngredientSubstitutionGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.IngredientSubstitutionWhereInput;
+    orderBy?: Prisma.IngredientSubstitutionOrderByWithAggregationInput | Prisma.IngredientSubstitutionOrderByWithAggregationInput[];
+    by: Prisma.IngredientSubstitutionScalarFieldEnum[] | Prisma.IngredientSubstitutionScalarFieldEnum;
+    having?: Prisma.IngredientSubstitutionScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: IngredientSubstitutionCountAggregateInputType | true;
+    _avg?: IngredientSubstitutionAvgAggregateInputType;
+    _sum?: IngredientSubstitutionSumAggregateInputType;
+    _min?: IngredientSubstitutionMinAggregateInputType;
+    _max?: IngredientSubstitutionMaxAggregateInputType;
+};
+export type IngredientSubstitutionGroupByOutputType = {
+    id: string;
+    fromIngredientId: string;
+    toIngredientId: string;
+    countryId: string;
+    ratio: number | null;
+    usageNotes: string | null;
+    qualityScore: number | null;
+    createdAt: Date;
+    updatedAt: Date;
+    _count: IngredientSubstitutionCountAggregateOutputType | null;
+    _avg: IngredientSubstitutionAvgAggregateOutputType | null;
+    _sum: IngredientSubstitutionSumAggregateOutputType | null;
+    _min: IngredientSubstitutionMinAggregateOutputType | null;
+    _max: IngredientSubstitutionMaxAggregateOutputType | null;
+};
+export type GetIngredientSubstitutionGroupByPayload<T extends IngredientSubstitutionGroupByArgs> = Prisma.PrismaPromise<Array<Prisma.PickEnumerable<IngredientSubstitutionGroupByOutputType, T['by']> & {
+    [P in ((keyof T) & (keyof IngredientSubstitutionGroupByOutputType))]: P extends '_count' ? T[P] extends boolean ? number : Prisma.GetScalarType<T[P], IngredientSubstitutionGroupByOutputType[P]> : Prisma.GetScalarType<T[P], IngredientSubstitutionGroupByOutputType[P]>;
+}>>;
+export type IngredientSubstitutionWhereInput = {
+    AND?: Prisma.IngredientSubstitutionWhereInput | Prisma.IngredientSubstitutionWhereInput[];
+    OR?: Prisma.IngredientSubstitutionWhereInput[];
+    NOT?: Prisma.IngredientSubstitutionWhereInput | Prisma.IngredientSubstitutionWhereInput[];
+    id?: Prisma.StringFilter<"IngredientSubstitution"> | string;
+    fromIngredientId?: Prisma.StringFilter<"IngredientSubstitution"> | string;
+    toIngredientId?: Prisma.StringFilter<"IngredientSubstitution"> | string;
+    countryId?: Prisma.StringFilter<"IngredientSubstitution"> | string;
+    ratio?: Prisma.FloatNullableFilter<"IngredientSubstitution"> | number | null;
+    usageNotes?: Prisma.StringNullableFilter<"IngredientSubstitution"> | string | null;
+    qualityScore?: Prisma.IntNullableFilter<"IngredientSubstitution"> | number | null;
+    createdAt?: Prisma.DateTimeFilter<"IngredientSubstitution"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"IngredientSubstitution"> | Date | string;
+    fromIngredient?: Prisma.XOR<Prisma.IngredientScalarRelationFilter, Prisma.IngredientWhereInput>;
+    toIngredient?: Prisma.XOR<Prisma.IngredientScalarRelationFilter, Prisma.IngredientWhereInput>;
+    country?: Prisma.XOR<Prisma.CountryScalarRelationFilter, Prisma.CountryWhereInput>;
+};
+export type IngredientSubstitutionOrderByWithRelationInput = {
+    id?: Prisma.SortOrder;
+    fromIngredientId?: Prisma.SortOrder;
+    toIngredientId?: Prisma.SortOrder;
+    countryId?: Prisma.SortOrder;
+    ratio?: Prisma.SortOrderInput | Prisma.SortOrder;
+    usageNotes?: Prisma.SortOrderInput | Prisma.SortOrder;
+    qualityScore?: Prisma.SortOrderInput | Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+    fromIngredient?: Prisma.IngredientOrderByWithRelationInput;
+    toIngredient?: Prisma.IngredientOrderByWithRelationInput;
+    country?: Prisma.CountryOrderByWithRelationInput;
+};
+export type IngredientSubstitutionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string;
+    fromIngredientId_toIngredientId_countryId?: Prisma.IngredientSubstitutionFromIngredientIdToIngredientIdCountryIdCompoundUniqueInput;
+    AND?: Prisma.IngredientSubstitutionWhereInput | Prisma.IngredientSubstitutionWhereInput[];
+    OR?: Prisma.IngredientSubstitutionWhereInput[];
+    NOT?: Prisma.IngredientSubstitutionWhereInput | Prisma.IngredientSubstitutionWhereInput[];
+    fromIngredientId?: Prisma.StringFilter<"IngredientSubstitution"> | string;
+    toIngredientId?: Prisma.StringFilter<"IngredientSubstitution"> | string;
+    countryId?: Prisma.StringFilter<"IngredientSubstitution"> | string;
+    ratio?: Prisma.FloatNullableFilter<"IngredientSubstitution"> | number | null;
+    usageNotes?: Prisma.StringNullableFilter<"IngredientSubstitution"> | string | null;
+    qualityScore?: Prisma.IntNullableFilter<"IngredientSubstitution"> | number | null;
+    createdAt?: Prisma.DateTimeFilter<"IngredientSubstitution"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"IngredientSubstitution"> | Date | string;
+    fromIngredient?: Prisma.XOR<Prisma.IngredientScalarRelationFilter, Prisma.IngredientWhereInput>;
+    toIngredient?: Prisma.XOR<Prisma.IngredientScalarRelationFilter, Prisma.IngredientWhereInput>;
+    country?: Prisma.XOR<Prisma.CountryScalarRelationFilter, Prisma.CountryWhereInput>;
+}, "id" | "fromIngredientId_toIngredientId_countryId">;
+export type IngredientSubstitutionOrderByWithAggregationInput = {
+    id?: Prisma.SortOrder;
+    fromIngredientId?: Prisma.SortOrder;
+    toIngredientId?: Prisma.SortOrder;
+    countryId?: Prisma.SortOrder;
+    ratio?: Prisma.SortOrderInput | Prisma.SortOrder;
+    usageNotes?: Prisma.SortOrderInput | Prisma.SortOrder;
+    qualityScore?: Prisma.SortOrderInput | Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+    _count?: Prisma.IngredientSubstitutionCountOrderByAggregateInput;
+    _avg?: Prisma.IngredientSubstitutionAvgOrderByAggregateInput;
+    _max?: Prisma.IngredientSubstitutionMaxOrderByAggregateInput;
+    _min?: Prisma.IngredientSubstitutionMinOrderByAggregateInput;
+    _sum?: Prisma.IngredientSubstitutionSumOrderByAggregateInput;
+};
+export type IngredientSubstitutionScalarWhereWithAggregatesInput = {
+    AND?: Prisma.IngredientSubstitutionScalarWhereWithAggregatesInput | Prisma.IngredientSubstitutionScalarWhereWithAggregatesInput[];
+    OR?: Prisma.IngredientSubstitutionScalarWhereWithAggregatesInput[];
+    NOT?: Prisma.IngredientSubstitutionScalarWhereWithAggregatesInput | Prisma.IngredientSubstitutionScalarWhereWithAggregatesInput[];
+    id?: Prisma.StringWithAggregatesFilter<"IngredientSubstitution"> | string;
+    fromIngredientId?: Prisma.StringWithAggregatesFilter<"IngredientSubstitution"> | string;
+    toIngredientId?: Prisma.StringWithAggregatesFilter<"IngredientSubstitution"> | string;
+    countryId?: Prisma.StringWithAggregatesFilter<"IngredientSubstitution"> | string;
+    ratio?: Prisma.FloatNullableWithAggregatesFilter<"IngredientSubstitution"> | number | null;
+    usageNotes?: Prisma.StringNullableWithAggregatesFilter<"IngredientSubstitution"> | string | null;
+    qualityScore?: Prisma.IntNullableWithAggregatesFilter<"IngredientSubstitution"> | number | null;
+    createdAt?: Prisma.DateTimeWithAggregatesFilter<"IngredientSubstitution"> | Date | string;
+    updatedAt?: Prisma.DateTimeWithAggregatesFilter<"IngredientSubstitution"> | Date | string;
+};
+export type IngredientSubstitutionCreateInput = {
+    id?: string;
+    ratio?: number | null;
+    usageNotes?: string | null;
+    qualityScore?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    fromIngredient: Prisma.IngredientCreateNestedOneWithoutSubstitutionsFromInput;
+    toIngredient: Prisma.IngredientCreateNestedOneWithoutSubstitutionsToInput;
+    country: Prisma.CountryCreateNestedOneWithoutIngredientSubstitutionsInput;
+};
+export type IngredientSubstitutionUncheckedCreateInput = {
+    id?: string;
+    fromIngredientId: string;
+    toIngredientId: string;
+    countryId: string;
+    ratio?: number | null;
+    usageNotes?: string | null;
+    qualityScore?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type IngredientSubstitutionUpdateInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    fromIngredient?: Prisma.IngredientUpdateOneRequiredWithoutSubstitutionsFromNestedInput;
+    toIngredient?: Prisma.IngredientUpdateOneRequiredWithoutSubstitutionsToNestedInput;
+    country?: Prisma.CountryUpdateOneRequiredWithoutIngredientSubstitutionsNestedInput;
+};
+export type IngredientSubstitutionUncheckedUpdateInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    fromIngredientId?: Prisma.StringFieldUpdateOperationsInput | string;
+    toIngredientId?: Prisma.StringFieldUpdateOperationsInput | string;
+    countryId?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IngredientSubstitutionCreateManyInput = {
+    id?: string;
+    fromIngredientId: string;
+    toIngredientId: string;
+    countryId: string;
+    ratio?: number | null;
+    usageNotes?: string | null;
+    qualityScore?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type IngredientSubstitutionUpdateManyMutationInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IngredientSubstitutionUncheckedUpdateManyInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    fromIngredientId?: Prisma.StringFieldUpdateOperationsInput | string;
+    toIngredientId?: Prisma.StringFieldUpdateOperationsInput | string;
+    countryId?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IngredientSubstitutionListRelationFilter = {
+    every?: Prisma.IngredientSubstitutionWhereInput;
+    some?: Prisma.IngredientSubstitutionWhereInput;
+    none?: Prisma.IngredientSubstitutionWhereInput;
+};
+export type IngredientSubstitutionOrderByRelationAggregateInput = {
+    _count?: Prisma.SortOrder;
+};
+export type IngredientSubstitutionFromIngredientIdToIngredientIdCountryIdCompoundUniqueInput = {
+    fromIngredientId: string;
+    toIngredientId: string;
+    countryId: string;
+};
+export type IngredientSubstitutionCountOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    fromIngredientId?: Prisma.SortOrder;
+    toIngredientId?: Prisma.SortOrder;
+    countryId?: Prisma.SortOrder;
+    ratio?: Prisma.SortOrder;
+    usageNotes?: Prisma.SortOrder;
+    qualityScore?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+};
+export type IngredientSubstitutionAvgOrderByAggregateInput = {
+    ratio?: Prisma.SortOrder;
+    qualityScore?: Prisma.SortOrder;
+};
+export type IngredientSubstitutionMaxOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    fromIngredientId?: Prisma.SortOrder;
+    toIngredientId?: Prisma.SortOrder;
+    countryId?: Prisma.SortOrder;
+    ratio?: Prisma.SortOrder;
+    usageNotes?: Prisma.SortOrder;
+    qualityScore?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+};
+export type IngredientSubstitutionMinOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    fromIngredientId?: Prisma.SortOrder;
+    toIngredientId?: Prisma.SortOrder;
+    countryId?: Prisma.SortOrder;
+    ratio?: Prisma.SortOrder;
+    usageNotes?: Prisma.SortOrder;
+    qualityScore?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+};
+export type IngredientSubstitutionSumOrderByAggregateInput = {
+    ratio?: Prisma.SortOrder;
+    qualityScore?: Prisma.SortOrder;
+};
+export type IngredientSubstitutionCreateNestedManyWithoutFromIngredientInput = {
+    create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutFromIngredientInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutFromIngredientInput> | Prisma.IngredientSubstitutionCreateWithoutFromIngredientInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutFromIngredientInput[];
+    connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutFromIngredientInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutFromIngredientInput[];
+    createMany?: Prisma.IngredientSubstitutionCreateManyFromIngredientInputEnvelope;
+    connect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+};
+export type IngredientSubstitutionCreateNestedManyWithoutToIngredientInput = {
+    create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutToIngredientInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutToIngredientInput> | Prisma.IngredientSubstitutionCreateWithoutToIngredientInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutToIngredientInput[];
+    connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutToIngredientInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutToIngredientInput[];
+    createMany?: Prisma.IngredientSubstitutionCreateManyToIngredientInputEnvelope;
+    connect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+};
+export type IngredientSubstitutionUncheckedCreateNestedManyWithoutFromIngredientInput = {
+    create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutFromIngredientInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutFromIngredientInput> | Prisma.IngredientSubstitutionCreateWithoutFromIngredientInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutFromIngredientInput[];
+    connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutFromIngredientInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutFromIngredientInput[];
+    createMany?: Prisma.IngredientSubstitutionCreateManyFromIngredientInputEnvelope;
+    connect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+};
+export type IngredientSubstitutionUncheckedCreateNestedManyWithoutToIngredientInput = {
+    create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutToIngredientInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutToIngredientInput> | Prisma.IngredientSubstitutionCreateWithoutToIngredientInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutToIngredientInput[];
+    connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutToIngredientInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutToIngredientInput[];
+    createMany?: Prisma.IngredientSubstitutionCreateManyToIngredientInputEnvelope;
+    connect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+};
+export type IngredientSubstitutionUpdateManyWithoutFromIngredientNestedInput = {
+    create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutFromIngredientInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutFromIngredientInput> | Prisma.IngredientSubstitutionCreateWithoutFromIngredientInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutFromIngredientInput[];
+    connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutFromIngredientInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutFromIngredientInput[];
+    upsert?: Prisma.IngredientSubstitutionUpsertWithWhereUniqueWithoutFromIngredientInput | Prisma.IngredientSubstitutionUpsertWithWhereUniqueWithoutFromIngredientInput[];
+    createMany?: Prisma.IngredientSubstitutionCreateManyFromIngredientInputEnvelope;
+    set?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    disconnect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    delete?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    connect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    update?: Prisma.IngredientSubstitutionUpdateWithWhereUniqueWithoutFromIngredientInput | Prisma.IngredientSubstitutionUpdateWithWhereUniqueWithoutFromIngredientInput[];
+    updateMany?: Prisma.IngredientSubstitutionUpdateManyWithWhereWithoutFromIngredientInput | Prisma.IngredientSubstitutionUpdateManyWithWhereWithoutFromIngredientInput[];
+    deleteMany?: Prisma.IngredientSubstitutionScalarWhereInput | Prisma.IngredientSubstitutionScalarWhereInput[];
+};
+export type IngredientSubstitutionUpdateManyWithoutToIngredientNestedInput = {
+    create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutToIngredientInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutToIngredientInput> | Prisma.IngredientSubstitutionCreateWithoutToIngredientInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutToIngredientInput[];
+    connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutToIngredientInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutToIngredientInput[];
+    upsert?: Prisma.IngredientSubstitutionUpsertWithWhereUniqueWithoutToIngredientInput | Prisma.IngredientSubstitutionUpsertWithWhereUniqueWithoutToIngredientInput[];
+    createMany?: Prisma.IngredientSubstitutionCreateManyToIngredientInputEnvelope;
+    set?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    disconnect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    delete?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    connect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    update?: Prisma.IngredientSubstitutionUpdateWithWhereUniqueWithoutToIngredientInput | Prisma.IngredientSubstitutionUpdateWithWhereUniqueWithoutToIngredientInput[];
+    updateMany?: Prisma.IngredientSubstitutionUpdateManyWithWhereWithoutToIngredientInput | Prisma.IngredientSubstitutionUpdateManyWithWhereWithoutToIngredientInput[];
+    deleteMany?: Prisma.IngredientSubstitutionScalarWhereInput | Prisma.IngredientSubstitutionScalarWhereInput[];
+};
+export type IngredientSubstitutionUncheckedUpdateManyWithoutFromIngredientNestedInput = {
+    create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutFromIngredientInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutFromIngredientInput> | Prisma.IngredientSubstitutionCreateWithoutFromIngredientInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutFromIngredientInput[];
+    connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutFromIngredientInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutFromIngredientInput[];
+    upsert?: Prisma.IngredientSubstitutionUpsertWithWhereUniqueWithoutFromIngredientInput | Prisma.IngredientSubstitutionUpsertWithWhereUniqueWithoutFromIngredientInput[];
+    createMany?: Prisma.IngredientSubstitutionCreateManyFromIngredientInputEnvelope;
+    set?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    disconnect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    delete?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    connect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    update?: Prisma.IngredientSubstitutionUpdateWithWhereUniqueWithoutFromIngredientInput | Prisma.IngredientSubstitutionUpdateWithWhereUniqueWithoutFromIngredientInput[];
+    updateMany?: Prisma.IngredientSubstitutionUpdateManyWithWhereWithoutFromIngredientInput | Prisma.IngredientSubstitutionUpdateManyWithWhereWithoutFromIngredientInput[];
+    deleteMany?: Prisma.IngredientSubstitutionScalarWhereInput | Prisma.IngredientSubstitutionScalarWhereInput[];
+};
+export type IngredientSubstitutionUncheckedUpdateManyWithoutToIngredientNestedInput = {
+    create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutToIngredientInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutToIngredientInput> | Prisma.IngredientSubstitutionCreateWithoutToIngredientInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutToIngredientInput[];
+    connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutToIngredientInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutToIngredientInput[];
+    upsert?: Prisma.IngredientSubstitutionUpsertWithWhereUniqueWithoutToIngredientInput | Prisma.IngredientSubstitutionUpsertWithWhereUniqueWithoutToIngredientInput[];
+    createMany?: Prisma.IngredientSubstitutionCreateManyToIngredientInputEnvelope;
+    set?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    disconnect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    delete?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    connect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    update?: Prisma.IngredientSubstitutionUpdateWithWhereUniqueWithoutToIngredientInput | Prisma.IngredientSubstitutionUpdateWithWhereUniqueWithoutToIngredientInput[];
+    updateMany?: Prisma.IngredientSubstitutionUpdateManyWithWhereWithoutToIngredientInput | Prisma.IngredientSubstitutionUpdateManyWithWhereWithoutToIngredientInput[];
+    deleteMany?: Prisma.IngredientSubstitutionScalarWhereInput | Prisma.IngredientSubstitutionScalarWhereInput[];
+};
+export type IngredientSubstitutionCreateNestedManyWithoutCountryInput = {
+    create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutCountryInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutCountryInput> | Prisma.IngredientSubstitutionCreateWithoutCountryInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutCountryInput[];
+    connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutCountryInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutCountryInput[];
+    createMany?: Prisma.IngredientSubstitutionCreateManyCountryInputEnvelope;
+    connect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+};
+export type IngredientSubstitutionUncheckedCreateNestedManyWithoutCountryInput = {
+    create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutCountryInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutCountryInput> | Prisma.IngredientSubstitutionCreateWithoutCountryInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutCountryInput[];
+    connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutCountryInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutCountryInput[];
+    createMany?: Prisma.IngredientSubstitutionCreateManyCountryInputEnvelope;
+    connect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+};
+export type IngredientSubstitutionUpdateManyWithoutCountryNestedInput = {
+    create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutCountryInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutCountryInput> | Prisma.IngredientSubstitutionCreateWithoutCountryInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutCountryInput[];
+    connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutCountryInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutCountryInput[];
+    upsert?: Prisma.IngredientSubstitutionUpsertWithWhereUniqueWithoutCountryInput | Prisma.IngredientSubstitutionUpsertWithWhereUniqueWithoutCountryInput[];
+    createMany?: Prisma.IngredientSubstitutionCreateManyCountryInputEnvelope;
+    set?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    disconnect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    delete?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    connect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    update?: Prisma.IngredientSubstitutionUpdateWithWhereUniqueWithoutCountryInput | Prisma.IngredientSubstitutionUpdateWithWhereUniqueWithoutCountryInput[];
+    updateMany?: Prisma.IngredientSubstitutionUpdateManyWithWhereWithoutCountryInput | Prisma.IngredientSubstitutionUpdateManyWithWhereWithoutCountryInput[];
+    deleteMany?: Prisma.IngredientSubstitutionScalarWhereInput | Prisma.IngredientSubstitutionScalarWhereInput[];
+};
+export type IngredientSubstitutionUncheckedUpdateManyWithoutCountryNestedInput = {
+    create?: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutCountryInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutCountryInput> | Prisma.IngredientSubstitutionCreateWithoutCountryInput[] | Prisma.IngredientSubstitutionUncheckedCreateWithoutCountryInput[];
+    connectOrCreate?: Prisma.IngredientSubstitutionCreateOrConnectWithoutCountryInput | Prisma.IngredientSubstitutionCreateOrConnectWithoutCountryInput[];
+    upsert?: Prisma.IngredientSubstitutionUpsertWithWhereUniqueWithoutCountryInput | Prisma.IngredientSubstitutionUpsertWithWhereUniqueWithoutCountryInput[];
+    createMany?: Prisma.IngredientSubstitutionCreateManyCountryInputEnvelope;
+    set?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    disconnect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    delete?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    connect?: Prisma.IngredientSubstitutionWhereUniqueInput | Prisma.IngredientSubstitutionWhereUniqueInput[];
+    update?: Prisma.IngredientSubstitutionUpdateWithWhereUniqueWithoutCountryInput | Prisma.IngredientSubstitutionUpdateWithWhereUniqueWithoutCountryInput[];
+    updateMany?: Prisma.IngredientSubstitutionUpdateManyWithWhereWithoutCountryInput | Prisma.IngredientSubstitutionUpdateManyWithWhereWithoutCountryInput[];
+    deleteMany?: Prisma.IngredientSubstitutionScalarWhereInput | Prisma.IngredientSubstitutionScalarWhereInput[];
+};
+export type IngredientSubstitutionCreateWithoutFromIngredientInput = {
+    id?: string;
+    ratio?: number | null;
+    usageNotes?: string | null;
+    qualityScore?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    toIngredient: Prisma.IngredientCreateNestedOneWithoutSubstitutionsToInput;
+    country: Prisma.CountryCreateNestedOneWithoutIngredientSubstitutionsInput;
+};
+export type IngredientSubstitutionUncheckedCreateWithoutFromIngredientInput = {
+    id?: string;
+    toIngredientId: string;
+    countryId: string;
+    ratio?: number | null;
+    usageNotes?: string | null;
+    qualityScore?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type IngredientSubstitutionCreateOrConnectWithoutFromIngredientInput = {
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+    create: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutFromIngredientInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutFromIngredientInput>;
+};
+export type IngredientSubstitutionCreateManyFromIngredientInputEnvelope = {
+    data: Prisma.IngredientSubstitutionCreateManyFromIngredientInput | Prisma.IngredientSubstitutionCreateManyFromIngredientInput[];
+    skipDuplicates?: boolean;
+};
+export type IngredientSubstitutionCreateWithoutToIngredientInput = {
+    id?: string;
+    ratio?: number | null;
+    usageNotes?: string | null;
+    qualityScore?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    fromIngredient: Prisma.IngredientCreateNestedOneWithoutSubstitutionsFromInput;
+    country: Prisma.CountryCreateNestedOneWithoutIngredientSubstitutionsInput;
+};
+export type IngredientSubstitutionUncheckedCreateWithoutToIngredientInput = {
+    id?: string;
+    fromIngredientId: string;
+    countryId: string;
+    ratio?: number | null;
+    usageNotes?: string | null;
+    qualityScore?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type IngredientSubstitutionCreateOrConnectWithoutToIngredientInput = {
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+    create: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutToIngredientInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutToIngredientInput>;
+};
+export type IngredientSubstitutionCreateManyToIngredientInputEnvelope = {
+    data: Prisma.IngredientSubstitutionCreateManyToIngredientInput | Prisma.IngredientSubstitutionCreateManyToIngredientInput[];
+    skipDuplicates?: boolean;
+};
+export type IngredientSubstitutionUpsertWithWhereUniqueWithoutFromIngredientInput = {
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+    update: Prisma.XOR<Prisma.IngredientSubstitutionUpdateWithoutFromIngredientInput, Prisma.IngredientSubstitutionUncheckedUpdateWithoutFromIngredientInput>;
+    create: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutFromIngredientInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutFromIngredientInput>;
+};
+export type IngredientSubstitutionUpdateWithWhereUniqueWithoutFromIngredientInput = {
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+    data: Prisma.XOR<Prisma.IngredientSubstitutionUpdateWithoutFromIngredientInput, Prisma.IngredientSubstitutionUncheckedUpdateWithoutFromIngredientInput>;
+};
+export type IngredientSubstitutionUpdateManyWithWhereWithoutFromIngredientInput = {
+    where: Prisma.IngredientSubstitutionScalarWhereInput;
+    data: Prisma.XOR<Prisma.IngredientSubstitutionUpdateManyMutationInput, Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutFromIngredientInput>;
+};
+export type IngredientSubstitutionScalarWhereInput = {
+    AND?: Prisma.IngredientSubstitutionScalarWhereInput | Prisma.IngredientSubstitutionScalarWhereInput[];
+    OR?: Prisma.IngredientSubstitutionScalarWhereInput[];
+    NOT?: Prisma.IngredientSubstitutionScalarWhereInput | Prisma.IngredientSubstitutionScalarWhereInput[];
+    id?: Prisma.StringFilter<"IngredientSubstitution"> | string;
+    fromIngredientId?: Prisma.StringFilter<"IngredientSubstitution"> | string;
+    toIngredientId?: Prisma.StringFilter<"IngredientSubstitution"> | string;
+    countryId?: Prisma.StringFilter<"IngredientSubstitution"> | string;
+    ratio?: Prisma.FloatNullableFilter<"IngredientSubstitution"> | number | null;
+    usageNotes?: Prisma.StringNullableFilter<"IngredientSubstitution"> | string | null;
+    qualityScore?: Prisma.IntNullableFilter<"IngredientSubstitution"> | number | null;
+    createdAt?: Prisma.DateTimeFilter<"IngredientSubstitution"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"IngredientSubstitution"> | Date | string;
+};
+export type IngredientSubstitutionUpsertWithWhereUniqueWithoutToIngredientInput = {
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+    update: Prisma.XOR<Prisma.IngredientSubstitutionUpdateWithoutToIngredientInput, Prisma.IngredientSubstitutionUncheckedUpdateWithoutToIngredientInput>;
+    create: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutToIngredientInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutToIngredientInput>;
+};
+export type IngredientSubstitutionUpdateWithWhereUniqueWithoutToIngredientInput = {
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+    data: Prisma.XOR<Prisma.IngredientSubstitutionUpdateWithoutToIngredientInput, Prisma.IngredientSubstitutionUncheckedUpdateWithoutToIngredientInput>;
+};
+export type IngredientSubstitutionUpdateManyWithWhereWithoutToIngredientInput = {
+    where: Prisma.IngredientSubstitutionScalarWhereInput;
+    data: Prisma.XOR<Prisma.IngredientSubstitutionUpdateManyMutationInput, Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutToIngredientInput>;
+};
+export type IngredientSubstitutionCreateWithoutCountryInput = {
+    id?: string;
+    ratio?: number | null;
+    usageNotes?: string | null;
+    qualityScore?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    fromIngredient: Prisma.IngredientCreateNestedOneWithoutSubstitutionsFromInput;
+    toIngredient: Prisma.IngredientCreateNestedOneWithoutSubstitutionsToInput;
+};
+export type IngredientSubstitutionUncheckedCreateWithoutCountryInput = {
+    id?: string;
+    fromIngredientId: string;
+    toIngredientId: string;
+    ratio?: number | null;
+    usageNotes?: string | null;
+    qualityScore?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type IngredientSubstitutionCreateOrConnectWithoutCountryInput = {
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+    create: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutCountryInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutCountryInput>;
+};
+export type IngredientSubstitutionCreateManyCountryInputEnvelope = {
+    data: Prisma.IngredientSubstitutionCreateManyCountryInput | Prisma.IngredientSubstitutionCreateManyCountryInput[];
+    skipDuplicates?: boolean;
+};
+export type IngredientSubstitutionUpsertWithWhereUniqueWithoutCountryInput = {
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+    update: Prisma.XOR<Prisma.IngredientSubstitutionUpdateWithoutCountryInput, Prisma.IngredientSubstitutionUncheckedUpdateWithoutCountryInput>;
+    create: Prisma.XOR<Prisma.IngredientSubstitutionCreateWithoutCountryInput, Prisma.IngredientSubstitutionUncheckedCreateWithoutCountryInput>;
+};
+export type IngredientSubstitutionUpdateWithWhereUniqueWithoutCountryInput = {
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+    data: Prisma.XOR<Prisma.IngredientSubstitutionUpdateWithoutCountryInput, Prisma.IngredientSubstitutionUncheckedUpdateWithoutCountryInput>;
+};
+export type IngredientSubstitutionUpdateManyWithWhereWithoutCountryInput = {
+    where: Prisma.IngredientSubstitutionScalarWhereInput;
+    data: Prisma.XOR<Prisma.IngredientSubstitutionUpdateManyMutationInput, Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutCountryInput>;
+};
+export type IngredientSubstitutionCreateManyFromIngredientInput = {
+    id?: string;
+    toIngredientId: string;
+    countryId: string;
+    ratio?: number | null;
+    usageNotes?: string | null;
+    qualityScore?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type IngredientSubstitutionCreateManyToIngredientInput = {
+    id?: string;
+    fromIngredientId: string;
+    countryId: string;
+    ratio?: number | null;
+    usageNotes?: string | null;
+    qualityScore?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type IngredientSubstitutionUpdateWithoutFromIngredientInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    toIngredient?: Prisma.IngredientUpdateOneRequiredWithoutSubstitutionsToNestedInput;
+    country?: Prisma.CountryUpdateOneRequiredWithoutIngredientSubstitutionsNestedInput;
+};
+export type IngredientSubstitutionUncheckedUpdateWithoutFromIngredientInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    toIngredientId?: Prisma.StringFieldUpdateOperationsInput | string;
+    countryId?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IngredientSubstitutionUncheckedUpdateManyWithoutFromIngredientInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    toIngredientId?: Prisma.StringFieldUpdateOperationsInput | string;
+    countryId?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IngredientSubstitutionUpdateWithoutToIngredientInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    fromIngredient?: Prisma.IngredientUpdateOneRequiredWithoutSubstitutionsFromNestedInput;
+    country?: Prisma.CountryUpdateOneRequiredWithoutIngredientSubstitutionsNestedInput;
+};
+export type IngredientSubstitutionUncheckedUpdateWithoutToIngredientInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    fromIngredientId?: Prisma.StringFieldUpdateOperationsInput | string;
+    countryId?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IngredientSubstitutionUncheckedUpdateManyWithoutToIngredientInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    fromIngredientId?: Prisma.StringFieldUpdateOperationsInput | string;
+    countryId?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IngredientSubstitutionCreateManyCountryInput = {
+    id?: string;
+    fromIngredientId: string;
+    toIngredientId: string;
+    ratio?: number | null;
+    usageNotes?: string | null;
+    qualityScore?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type IngredientSubstitutionUpdateWithoutCountryInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    fromIngredient?: Prisma.IngredientUpdateOneRequiredWithoutSubstitutionsFromNestedInput;
+    toIngredient?: Prisma.IngredientUpdateOneRequiredWithoutSubstitutionsToNestedInput;
+};
+export type IngredientSubstitutionUncheckedUpdateWithoutCountryInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    fromIngredientId?: Prisma.StringFieldUpdateOperationsInput | string;
+    toIngredientId?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IngredientSubstitutionUncheckedUpdateManyWithoutCountryInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    fromIngredientId?: Prisma.StringFieldUpdateOperationsInput | string;
+    toIngredientId?: Prisma.StringFieldUpdateOperationsInput | string;
+    ratio?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    usageNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    qualityScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type IngredientSubstitutionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    fromIngredientId?: boolean;
+    toIngredientId?: boolean;
+    countryId?: boolean;
+    ratio?: boolean;
+    usageNotes?: boolean;
+    qualityScore?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    fromIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>;
+    toIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>;
+    country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["ingredientSubstitution"]>;
+export type IngredientSubstitutionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    fromIngredientId?: boolean;
+    toIngredientId?: boolean;
+    countryId?: boolean;
+    ratio?: boolean;
+    usageNotes?: boolean;
+    qualityScore?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    fromIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>;
+    toIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>;
+    country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["ingredientSubstitution"]>;
+export type IngredientSubstitutionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    fromIngredientId?: boolean;
+    toIngredientId?: boolean;
+    countryId?: boolean;
+    ratio?: boolean;
+    usageNotes?: boolean;
+    qualityScore?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    fromIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>;
+    toIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>;
+    country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["ingredientSubstitution"]>;
+export type IngredientSubstitutionSelectScalar = {
+    id?: boolean;
+    fromIngredientId?: boolean;
+    toIngredientId?: boolean;
+    countryId?: boolean;
+    ratio?: boolean;
+    usageNotes?: boolean;
+    qualityScore?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+};
+export type IngredientSubstitutionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fromIngredientId" | "toIngredientId" | "countryId" | "ratio" | "usageNotes" | "qualityScore" | "createdAt" | "updatedAt", ExtArgs["result"]["ingredientSubstitution"]>;
+export type IngredientSubstitutionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    fromIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>;
+    toIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>;
+    country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>;
+};
+export type IngredientSubstitutionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    fromIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>;
+    toIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>;
+    country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>;
+};
+export type IngredientSubstitutionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    fromIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>;
+    toIngredient?: boolean | Prisma.IngredientDefaultArgs<ExtArgs>;
+    country?: boolean | Prisma.CountryDefaultArgs<ExtArgs>;
+};
+export type $IngredientSubstitutionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    name: "IngredientSubstitution";
+    objects: {
+        fromIngredient: Prisma.$IngredientPayload<ExtArgs>;
+        toIngredient: Prisma.$IngredientPayload<ExtArgs>;
+        country: Prisma.$CountryPayload<ExtArgs>;
+    };
+    scalars: runtime.Types.Extensions.GetPayloadResult<{
+        id: string;
+        fromIngredientId: string;
+        toIngredientId: string;
+        countryId: string;
+        ratio: number | null;
+        usageNotes: string | null;
+        qualityScore: number | null;
+        createdAt: Date;
+        updatedAt: Date;
+    }, ExtArgs["result"]["ingredientSubstitution"]>;
+    composites: {};
+};
+export type IngredientSubstitutionGetPayload<S extends boolean | null | undefined | IngredientSubstitutionDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload, S>;
+export type IngredientSubstitutionCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = Omit<IngredientSubstitutionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: IngredientSubstitutionCountAggregateInputType | true;
+};
+export interface IngredientSubstitutionDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: {
+        types: Prisma.TypeMap<ExtArgs>['model']['IngredientSubstitution'];
+        meta: {
+            name: 'IngredientSubstitution';
+        };
+    };
+    /**
+     * Find zero or one IngredientSubstitution that matches the filter.
+     * @param {IngredientSubstitutionFindUniqueArgs} args - Arguments to find a IngredientSubstitution
+     * @example
+     * // Get one IngredientSubstitution
+     * const ingredientSubstitution = await prisma.ingredientSubstitution.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IngredientSubstitutionFindUniqueArgs>(args: Prisma.SelectSubset<T, IngredientSubstitutionFindUniqueArgs<ExtArgs>>): Prisma.Prisma__IngredientSubstitutionClient<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find one IngredientSubstitution that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IngredientSubstitutionFindUniqueOrThrowArgs} args - Arguments to find a IngredientSubstitution
+     * @example
+     * // Get one IngredientSubstitution
+     * const ingredientSubstitution = await prisma.ingredientSubstitution.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IngredientSubstitutionFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, IngredientSubstitutionFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__IngredientSubstitutionClient<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first IngredientSubstitution that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredientSubstitutionFindFirstArgs} args - Arguments to find a IngredientSubstitution
+     * @example
+     * // Get one IngredientSubstitution
+     * const ingredientSubstitution = await prisma.ingredientSubstitution.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IngredientSubstitutionFindFirstArgs>(args?: Prisma.SelectSubset<T, IngredientSubstitutionFindFirstArgs<ExtArgs>>): Prisma.Prisma__IngredientSubstitutionClient<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first IngredientSubstitution that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredientSubstitutionFindFirstOrThrowArgs} args - Arguments to find a IngredientSubstitution
+     * @example
+     * // Get one IngredientSubstitution
+     * const ingredientSubstitution = await prisma.ingredientSubstitution.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IngredientSubstitutionFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, IngredientSubstitutionFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__IngredientSubstitutionClient<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find zero or more IngredientSubstitutions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredientSubstitutionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IngredientSubstitutions
+     * const ingredientSubstitutions = await prisma.ingredientSubstitution.findMany()
+     *
+     * // Get first 10 IngredientSubstitutions
+     * const ingredientSubstitutions = await prisma.ingredientSubstitution.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const ingredientSubstitutionWithIdOnly = await prisma.ingredientSubstitution.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends IngredientSubstitutionFindManyArgs>(args?: Prisma.SelectSubset<T, IngredientSubstitutionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
+    /**
+     * Create a IngredientSubstitution.
+     * @param {IngredientSubstitutionCreateArgs} args - Arguments to create a IngredientSubstitution.
+     * @example
+     * // Create one IngredientSubstitution
+     * const IngredientSubstitution = await prisma.ingredientSubstitution.create({
+     *   data: {
+     *     // ... data to create a IngredientSubstitution
+     *   }
+     * })
+     *
+     */
+    create<T extends IngredientSubstitutionCreateArgs>(args: Prisma.SelectSubset<T, IngredientSubstitutionCreateArgs<ExtArgs>>): Prisma.Prisma__IngredientSubstitutionClient<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Create many IngredientSubstitutions.
+     * @param {IngredientSubstitutionCreateManyArgs} args - Arguments to create many IngredientSubstitutions.
+     * @example
+     * // Create many IngredientSubstitutions
+     * const ingredientSubstitution = await prisma.ingredientSubstitution.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends IngredientSubstitutionCreateManyArgs>(args?: Prisma.SelectSubset<T, IngredientSubstitutionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Create many IngredientSubstitutions and returns the data saved in the database.
+     * @param {IngredientSubstitutionCreateManyAndReturnArgs} args - Arguments to create many IngredientSubstitutions.
+     * @example
+     * // Create many IngredientSubstitutions
+     * const ingredientSubstitution = await prisma.ingredientSubstitution.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many IngredientSubstitutions and only return the `id`
+     * const ingredientSubstitutionWithIdOnly = await prisma.ingredientSubstitution.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends IngredientSubstitutionCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, IngredientSubstitutionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Delete a IngredientSubstitution.
+     * @param {IngredientSubstitutionDeleteArgs} args - Arguments to delete one IngredientSubstitution.
+     * @example
+     * // Delete one IngredientSubstitution
+     * const IngredientSubstitution = await prisma.ingredientSubstitution.delete({
+     *   where: {
+     *     // ... filter to delete one IngredientSubstitution
+     *   }
+     * })
+     *
+     */
+    delete<T extends IngredientSubstitutionDeleteArgs>(args: Prisma.SelectSubset<T, IngredientSubstitutionDeleteArgs<ExtArgs>>): Prisma.Prisma__IngredientSubstitutionClient<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Update one IngredientSubstitution.
+     * @param {IngredientSubstitutionUpdateArgs} args - Arguments to update one IngredientSubstitution.
+     * @example
+     * // Update one IngredientSubstitution
+     * const ingredientSubstitution = await prisma.ingredientSubstitution.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends IngredientSubstitutionUpdateArgs>(args: Prisma.SelectSubset<T, IngredientSubstitutionUpdateArgs<ExtArgs>>): Prisma.Prisma__IngredientSubstitutionClient<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Delete zero or more IngredientSubstitutions.
+     * @param {IngredientSubstitutionDeleteManyArgs} args - Arguments to filter IngredientSubstitutions to delete.
+     * @example
+     * // Delete a few IngredientSubstitutions
+     * const { count } = await prisma.ingredientSubstitution.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends IngredientSubstitutionDeleteManyArgs>(args?: Prisma.SelectSubset<T, IngredientSubstitutionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more IngredientSubstitutions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredientSubstitutionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IngredientSubstitutions
+     * const ingredientSubstitution = await prisma.ingredientSubstitution.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends IngredientSubstitutionUpdateManyArgs>(args: Prisma.SelectSubset<T, IngredientSubstitutionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more IngredientSubstitutions and returns the data updated in the database.
+     * @param {IngredientSubstitutionUpdateManyAndReturnArgs} args - Arguments to update many IngredientSubstitutions.
+     * @example
+     * // Update many IngredientSubstitutions
+     * const ingredientSubstitution = await prisma.ingredientSubstitution.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more IngredientSubstitutions and only return the `id`
+     * const ingredientSubstitutionWithIdOnly = await prisma.ingredientSubstitution.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends IngredientSubstitutionUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, IngredientSubstitutionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Create or update one IngredientSubstitution.
+     * @param {IngredientSubstitutionUpsertArgs} args - Arguments to update or create a IngredientSubstitution.
+     * @example
+     * // Update or create a IngredientSubstitution
+     * const ingredientSubstitution = await prisma.ingredientSubstitution.upsert({
+     *   create: {
+     *     // ... data to create a IngredientSubstitution
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IngredientSubstitution we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IngredientSubstitutionUpsertArgs>(args: Prisma.SelectSubset<T, IngredientSubstitutionUpsertArgs<ExtArgs>>): Prisma.Prisma__IngredientSubstitutionClient<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Count the number of IngredientSubstitutions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredientSubstitutionCountArgs} args - Arguments to filter IngredientSubstitutions to count.
+     * @example
+     * // Count the number of IngredientSubstitutions
+     * const count = await prisma.ingredientSubstitution.count({
+     *   where: {
+     *     // ... the filter for the IngredientSubstitutions we want to count
+     *   }
+     * })
+    **/
+    count<T extends IngredientSubstitutionCountArgs>(args?: Prisma.Subset<T, IngredientSubstitutionCountArgs>): Prisma.PrismaPromise<T extends runtime.Types.Utils.Record<'select', any> ? T['select'] extends true ? number : Prisma.GetScalarType<T['select'], IngredientSubstitutionCountAggregateOutputType> : number>;
+    /**
+     * Allows you to perform aggregations operations on a IngredientSubstitution.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredientSubstitutionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IngredientSubstitutionAggregateArgs>(args: Prisma.Subset<T, IngredientSubstitutionAggregateArgs>): Prisma.PrismaPromise<GetIngredientSubstitutionAggregateType<T>>;
+    /**
+     * Group by IngredientSubstitution.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredientSubstitutionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+    **/
+    groupBy<T extends IngredientSubstitutionGroupByArgs, HasSelectOrTake extends Prisma.Or<Prisma.Extends<'skip', Prisma.Keys<T>>, Prisma.Extends<'take', Prisma.Keys<T>>>, OrderByArg extends Prisma.True extends HasSelectOrTake ? {
+        orderBy: IngredientSubstitutionGroupByArgs['orderBy'];
+    } : {
+        orderBy?: IngredientSubstitutionGroupByArgs['orderBy'];
+    }, OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>, ByFields extends Prisma.MaybeTupleToUnion<T['by']>, ByValid extends Prisma.Has<ByFields, OrderFields>, HavingFields extends Prisma.GetHavingFields<T['having']>, HavingValid extends Prisma.Has<ByFields, HavingFields>, ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False, InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.` : HavingValid extends Prisma.False ? {
+        [P in HavingFields]: P extends ByFields ? never : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".` : [
+            Error,
+            'Field ',
+            P,
+            ` in "having" needs to be provided in "by"`
+        ];
+    }[HavingFields] : 'take' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "take", you also need to provide "orderBy"' : 'skip' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "skip", you also need to provide "orderBy"' : ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields]>(args: Prisma.SubsetIntersection<T, IngredientSubstitutionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIngredientSubstitutionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the IngredientSubstitution model
+     */
+    readonly fields: IngredientSubstitutionFieldRefs;
+}
+/**
+ * The delegate class that acts as a "Promise-like" for IngredientSubstitution.
+ * Why is this prefixed with `Prisma__`?
+ * Because we want to prevent naming conflicts as mentioned in
+ * https://github.com/prisma/prisma-client-js/issues/707
+ */
+export interface Prisma__IngredientSubstitutionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise";
+    fromIngredient<T extends Prisma.IngredientDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IngredientDefaultArgs<ExtArgs>>): Prisma.Prisma__IngredientClient<runtime.Types.Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    toIngredient<T extends Prisma.IngredientDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IngredientDefaultArgs<ExtArgs>>): Prisma.Prisma__IngredientClient<runtime.Types.Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    country<T extends Prisma.CountryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CountryDefaultArgs<ExtArgs>>): Prisma.Prisma__CountryClient<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): runtime.Types.Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
+}
+/**
+ * Fields of the IngredientSubstitution model
+ */
+export interface IngredientSubstitutionFieldRefs {
+    readonly id: Prisma.FieldRef<"IngredientSubstitution", 'String'>;
+    readonly fromIngredientId: Prisma.FieldRef<"IngredientSubstitution", 'String'>;
+    readonly toIngredientId: Prisma.FieldRef<"IngredientSubstitution", 'String'>;
+    readonly countryId: Prisma.FieldRef<"IngredientSubstitution", 'String'>;
+    readonly ratio: Prisma.FieldRef<"IngredientSubstitution", 'Float'>;
+    readonly usageNotes: Prisma.FieldRef<"IngredientSubstitution", 'String'>;
+    readonly qualityScore: Prisma.FieldRef<"IngredientSubstitution", 'Int'>;
+    readonly createdAt: Prisma.FieldRef<"IngredientSubstitution", 'DateTime'>;
+    readonly updatedAt: Prisma.FieldRef<"IngredientSubstitution", 'DateTime'>;
+}
+/**
+ * IngredientSubstitution findUnique
+ */
+export type IngredientSubstitutionFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredientSubstitution
+     */
+    select?: Prisma.IngredientSubstitutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IngredientSubstitution
+     */
+    omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IngredientSubstitutionInclude<ExtArgs> | null;
+    /**
+     * Filter, which IngredientSubstitution to fetch.
+     */
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+};
+/**
+ * IngredientSubstitution findUniqueOrThrow
+ */
+export type IngredientSubstitutionFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredientSubstitution
+     */
+    select?: Prisma.IngredientSubstitutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IngredientSubstitution
+     */
+    omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IngredientSubstitutionInclude<ExtArgs> | null;
+    /**
+     * Filter, which IngredientSubstitution to fetch.
+     */
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+};
+/**
+ * IngredientSubstitution findFirst
+ */
+export type IngredientSubstitutionFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredientSubstitution
+     */
+    select?: Prisma.IngredientSubstitutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IngredientSubstitution
+     */
+    omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IngredientSubstitutionInclude<ExtArgs> | null;
+    /**
+     * Filter, which IngredientSubstitution to fetch.
+     */
+    where?: Prisma.IngredientSubstitutionWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of IngredientSubstitutions to fetch.
+     */
+    orderBy?: Prisma.IngredientSubstitutionOrderByWithRelationInput | Prisma.IngredientSubstitutionOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for IngredientSubstitutions.
+     */
+    cursor?: Prisma.IngredientSubstitutionWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` IngredientSubstitutions from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` IngredientSubstitutions.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of IngredientSubstitutions.
+     */
+    distinct?: Prisma.IngredientSubstitutionScalarFieldEnum | Prisma.IngredientSubstitutionScalarFieldEnum[];
+};
+/**
+ * IngredientSubstitution findFirstOrThrow
+ */
+export type IngredientSubstitutionFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredientSubstitution
+     */
+    select?: Prisma.IngredientSubstitutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IngredientSubstitution
+     */
+    omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IngredientSubstitutionInclude<ExtArgs> | null;
+    /**
+     * Filter, which IngredientSubstitution to fetch.
+     */
+    where?: Prisma.IngredientSubstitutionWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of IngredientSubstitutions to fetch.
+     */
+    orderBy?: Prisma.IngredientSubstitutionOrderByWithRelationInput | Prisma.IngredientSubstitutionOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for IngredientSubstitutions.
+     */
+    cursor?: Prisma.IngredientSubstitutionWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` IngredientSubstitutions from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` IngredientSubstitutions.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of IngredientSubstitutions.
+     */
+    distinct?: Prisma.IngredientSubstitutionScalarFieldEnum | Prisma.IngredientSubstitutionScalarFieldEnum[];
+};
+/**
+ * IngredientSubstitution findMany
+ */
+export type IngredientSubstitutionFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredientSubstitution
+     */
+    select?: Prisma.IngredientSubstitutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IngredientSubstitution
+     */
+    omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IngredientSubstitutionInclude<ExtArgs> | null;
+    /**
+     * Filter, which IngredientSubstitutions to fetch.
+     */
+    where?: Prisma.IngredientSubstitutionWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of IngredientSubstitutions to fetch.
+     */
+    orderBy?: Prisma.IngredientSubstitutionOrderByWithRelationInput | Prisma.IngredientSubstitutionOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing IngredientSubstitutions.
+     */
+    cursor?: Prisma.IngredientSubstitutionWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` IngredientSubstitutions from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` IngredientSubstitutions.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of IngredientSubstitutions.
+     */
+    distinct?: Prisma.IngredientSubstitutionScalarFieldEnum | Prisma.IngredientSubstitutionScalarFieldEnum[];
+};
+/**
+ * IngredientSubstitution create
+ */
+export type IngredientSubstitutionCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredientSubstitution
+     */
+    select?: Prisma.IngredientSubstitutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IngredientSubstitution
+     */
+    omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IngredientSubstitutionInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a IngredientSubstitution.
+     */
+    data: Prisma.XOR<Prisma.IngredientSubstitutionCreateInput, Prisma.IngredientSubstitutionUncheckedCreateInput>;
+};
+/**
+ * IngredientSubstitution createMany
+ */
+export type IngredientSubstitutionCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IngredientSubstitutions.
+     */
+    data: Prisma.IngredientSubstitutionCreateManyInput | Prisma.IngredientSubstitutionCreateManyInput[];
+    skipDuplicates?: boolean;
+};
+/**
+ * IngredientSubstitution createManyAndReturn
+ */
+export type IngredientSubstitutionCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredientSubstitution
+     */
+    select?: Prisma.IngredientSubstitutionSelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IngredientSubstitution
+     */
+    omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null;
+    /**
+     * The data used to create many IngredientSubstitutions.
+     */
+    data: Prisma.IngredientSubstitutionCreateManyInput | Prisma.IngredientSubstitutionCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IngredientSubstitutionIncludeCreateManyAndReturn<ExtArgs> | null;
+};
+/**
+ * IngredientSubstitution update
+ */
+export type IngredientSubstitutionUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredientSubstitution
+     */
+    select?: Prisma.IngredientSubstitutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IngredientSubstitution
+     */
+    omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IngredientSubstitutionInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a IngredientSubstitution.
+     */
+    data: Prisma.XOR<Prisma.IngredientSubstitutionUpdateInput, Prisma.IngredientSubstitutionUncheckedUpdateInput>;
+    /**
+     * Choose, which IngredientSubstitution to update.
+     */
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+};
+/**
+ * IngredientSubstitution updateMany
+ */
+export type IngredientSubstitutionUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IngredientSubstitutions.
+     */
+    data: Prisma.XOR<Prisma.IngredientSubstitutionUpdateManyMutationInput, Prisma.IngredientSubstitutionUncheckedUpdateManyInput>;
+    /**
+     * Filter which IngredientSubstitutions to update
+     */
+    where?: Prisma.IngredientSubstitutionWhereInput;
+    /**
+     * Limit how many IngredientSubstitutions to update.
+     */
+    limit?: number;
+};
+/**
+ * IngredientSubstitution updateManyAndReturn
+ */
+export type IngredientSubstitutionUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredientSubstitution
+     */
+    select?: Prisma.IngredientSubstitutionSelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IngredientSubstitution
+     */
+    omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null;
+    /**
+     * The data used to update IngredientSubstitutions.
+     */
+    data: Prisma.XOR<Prisma.IngredientSubstitutionUpdateManyMutationInput, Prisma.IngredientSubstitutionUncheckedUpdateManyInput>;
+    /**
+     * Filter which IngredientSubstitutions to update
+     */
+    where?: Prisma.IngredientSubstitutionWhereInput;
+    /**
+     * Limit how many IngredientSubstitutions to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IngredientSubstitutionIncludeUpdateManyAndReturn<ExtArgs> | null;
+};
+/**
+ * IngredientSubstitution upsert
+ */
+export type IngredientSubstitutionUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredientSubstitution
+     */
+    select?: Prisma.IngredientSubstitutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IngredientSubstitution
+     */
+    omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IngredientSubstitutionInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the IngredientSubstitution to update in case it exists.
+     */
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+    /**
+     * In case the IngredientSubstitution found by the `where` argument doesn't exist, create a new IngredientSubstitution with this data.
+     */
+    create: Prisma.XOR<Prisma.IngredientSubstitutionCreateInput, Prisma.IngredientSubstitutionUncheckedCreateInput>;
+    /**
+     * In case the IngredientSubstitution was found with the provided `where` argument, update it with this data.
+     */
+    update: Prisma.XOR<Prisma.IngredientSubstitutionUpdateInput, Prisma.IngredientSubstitutionUncheckedUpdateInput>;
+};
+/**
+ * IngredientSubstitution delete
+ */
+export type IngredientSubstitutionDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredientSubstitution
+     */
+    select?: Prisma.IngredientSubstitutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IngredientSubstitution
+     */
+    omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IngredientSubstitutionInclude<ExtArgs> | null;
+    /**
+     * Filter which IngredientSubstitution to delete.
+     */
+    where: Prisma.IngredientSubstitutionWhereUniqueInput;
+};
+/**
+ * IngredientSubstitution deleteMany
+ */
+export type IngredientSubstitutionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which IngredientSubstitutions to delete
+     */
+    where?: Prisma.IngredientSubstitutionWhereInput;
+    /**
+     * Limit how many IngredientSubstitutions to delete.
+     */
+    limit?: number;
+};
+/**
+ * IngredientSubstitution without action
+ */
+export type IngredientSubstitutionDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredientSubstitution
+     */
+    select?: Prisma.IngredientSubstitutionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the IngredientSubstitution
+     */
+    omit?: Prisma.IngredientSubstitutionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.IngredientSubstitutionInclude<ExtArgs> | null;
+};
+//# sourceMappingURL=IngredientSubstitution.d.ts.map

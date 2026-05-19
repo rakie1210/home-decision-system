@@ -183,8 +183,8 @@ export type CountryWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Country"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Country"> | Date | string
   ingredients?: Prisma.IngredientListRelationFilter
-  recipeVariants?: Prisma.RecipeVariantListRelationFilter
   ingredientSubstitutions?: Prisma.IngredientSubstitutionListRelationFilter
+  recipes?: Prisma.RecipeListRelationFilter
 }
 
 export type CountryOrderByWithRelationInput = {
@@ -194,23 +194,23 @@ export type CountryOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   ingredients?: Prisma.IngredientOrderByRelationAggregateInput
-  recipeVariants?: Prisma.RecipeVariantOrderByRelationAggregateInput
   ingredientSubstitutions?: Prisma.IngredientSubstitutionOrderByRelationAggregateInput
+  recipes?: Prisma.RecipeOrderByRelationAggregateInput
 }
 
 export type CountryWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  name?: string
+  code?: string
   AND?: Prisma.CountryWhereInput | Prisma.CountryWhereInput[]
   OR?: Prisma.CountryWhereInput[]
   NOT?: Prisma.CountryWhereInput | Prisma.CountryWhereInput[]
-  name?: Prisma.StringFilter<"Country"> | string
-  code?: Prisma.StringFilter<"Country"> | string
   createdAt?: Prisma.DateTimeFilter<"Country"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Country"> | Date | string
   ingredients?: Prisma.IngredientListRelationFilter
-  recipeVariants?: Prisma.RecipeVariantListRelationFilter
   ingredientSubstitutions?: Prisma.IngredientSubstitutionListRelationFilter
-}, "id">
+  recipes?: Prisma.RecipeListRelationFilter
+}, "id" | "name" | "code">
 
 export type CountryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -241,8 +241,8 @@ export type CountryCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   ingredients?: Prisma.IngredientCreateNestedManyWithoutNativeCountryInput
-  recipeVariants?: Prisma.RecipeVariantCreateNestedManyWithoutCountryInput
   ingredientSubstitutions?: Prisma.IngredientSubstitutionCreateNestedManyWithoutCountryInput
+  recipes?: Prisma.RecipeCreateNestedManyWithoutCountryInput
 }
 
 export type CountryUncheckedCreateInput = {
@@ -252,8 +252,8 @@ export type CountryUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   ingredients?: Prisma.IngredientUncheckedCreateNestedManyWithoutNativeCountryInput
-  recipeVariants?: Prisma.RecipeVariantUncheckedCreateNestedManyWithoutCountryInput
   ingredientSubstitutions?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutCountryInput
+  recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutCountryInput
 }
 
 export type CountryUpdateInput = {
@@ -263,8 +263,8 @@ export type CountryUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ingredients?: Prisma.IngredientUpdateManyWithoutNativeCountryNestedInput
-  recipeVariants?: Prisma.RecipeVariantUpdateManyWithoutCountryNestedInput
   ingredientSubstitutions?: Prisma.IngredientSubstitutionUpdateManyWithoutCountryNestedInput
+  recipes?: Prisma.RecipeUpdateManyWithoutCountryNestedInput
 }
 
 export type CountryUncheckedUpdateInput = {
@@ -274,8 +274,8 @@ export type CountryUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ingredients?: Prisma.IngredientUncheckedUpdateManyWithoutNativeCountryNestedInput
-  recipeVariants?: Prisma.RecipeVariantUncheckedUpdateManyWithoutCountryNestedInput
   ingredientSubstitutions?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutCountryNestedInput
+  recipes?: Prisma.RecipeUncheckedUpdateManyWithoutCountryNestedInput
 }
 
 export type CountryCreateManyInput = {
@@ -302,14 +302,14 @@ export type CountryUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type CountryNullableScalarRelationFilter = {
-  is?: Prisma.CountryWhereInput | null
-  isNot?: Prisma.CountryWhereInput | null
-}
-
 export type CountryScalarRelationFilter = {
   is?: Prisma.CountryWhereInput
   isNot?: Prisma.CountryWhereInput
+}
+
+export type CountryNullableScalarRelationFilter = {
+  is?: Prisma.CountryWhereInput | null
+  isNot?: Prisma.CountryWhereInput | null
 }
 
 export type CountryCountOrderByAggregateInput = {
@@ -336,6 +336,20 @@ export type CountryMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type CountryCreateNestedOneWithoutRecipesInput = {
+  create?: Prisma.XOR<Prisma.CountryCreateWithoutRecipesInput, Prisma.CountryUncheckedCreateWithoutRecipesInput>
+  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutRecipesInput
+  connect?: Prisma.CountryWhereUniqueInput
+}
+
+export type CountryUpdateOneRequiredWithoutRecipesNestedInput = {
+  create?: Prisma.XOR<Prisma.CountryCreateWithoutRecipesInput, Prisma.CountryUncheckedCreateWithoutRecipesInput>
+  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutRecipesInput
+  upsert?: Prisma.CountryUpsertWithoutRecipesInput
+  connect?: Prisma.CountryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CountryUpdateToOneWithWhereWithoutRecipesInput, Prisma.CountryUpdateWithoutRecipesInput>, Prisma.CountryUncheckedUpdateWithoutRecipesInput>
+}
+
 export type CountryCreateNestedOneWithoutIngredientsInput = {
   create?: Prisma.XOR<Prisma.CountryCreateWithoutIngredientsInput, Prisma.CountryUncheckedCreateWithoutIngredientsInput>
   connectOrCreate?: Prisma.CountryCreateOrConnectWithoutIngredientsInput
@@ -358,28 +372,68 @@ export type CountryCreateNestedOneWithoutIngredientSubstitutionsInput = {
   connect?: Prisma.CountryWhereUniqueInput
 }
 
-export type CountryUpdateOneWithoutIngredientSubstitutionsNestedInput = {
+export type CountryUpdateOneRequiredWithoutIngredientSubstitutionsNestedInput = {
   create?: Prisma.XOR<Prisma.CountryCreateWithoutIngredientSubstitutionsInput, Prisma.CountryUncheckedCreateWithoutIngredientSubstitutionsInput>
   connectOrCreate?: Prisma.CountryCreateOrConnectWithoutIngredientSubstitutionsInput
   upsert?: Prisma.CountryUpsertWithoutIngredientSubstitutionsInput
-  disconnect?: Prisma.CountryWhereInput | boolean
-  delete?: Prisma.CountryWhereInput | boolean
   connect?: Prisma.CountryWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CountryUpdateToOneWithWhereWithoutIngredientSubstitutionsInput, Prisma.CountryUpdateWithoutIngredientSubstitutionsInput>, Prisma.CountryUncheckedUpdateWithoutIngredientSubstitutionsInput>
 }
 
-export type CountryCreateNestedOneWithoutRecipeVariantsInput = {
-  create?: Prisma.XOR<Prisma.CountryCreateWithoutRecipeVariantsInput, Prisma.CountryUncheckedCreateWithoutRecipeVariantsInput>
-  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutRecipeVariantsInput
-  connect?: Prisma.CountryWhereUniqueInput
+export type CountryCreateWithoutRecipesInput = {
+  id?: string
+  name: string
+  code: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ingredients?: Prisma.IngredientCreateNestedManyWithoutNativeCountryInput
+  ingredientSubstitutions?: Prisma.IngredientSubstitutionCreateNestedManyWithoutCountryInput
 }
 
-export type CountryUpdateOneRequiredWithoutRecipeVariantsNestedInput = {
-  create?: Prisma.XOR<Prisma.CountryCreateWithoutRecipeVariantsInput, Prisma.CountryUncheckedCreateWithoutRecipeVariantsInput>
-  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutRecipeVariantsInput
-  upsert?: Prisma.CountryUpsertWithoutRecipeVariantsInput
-  connect?: Prisma.CountryWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CountryUpdateToOneWithWhereWithoutRecipeVariantsInput, Prisma.CountryUpdateWithoutRecipeVariantsInput>, Prisma.CountryUncheckedUpdateWithoutRecipeVariantsInput>
+export type CountryUncheckedCreateWithoutRecipesInput = {
+  id?: string
+  name: string
+  code: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ingredients?: Prisma.IngredientUncheckedCreateNestedManyWithoutNativeCountryInput
+  ingredientSubstitutions?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutCountryInput
+}
+
+export type CountryCreateOrConnectWithoutRecipesInput = {
+  where: Prisma.CountryWhereUniqueInput
+  create: Prisma.XOR<Prisma.CountryCreateWithoutRecipesInput, Prisma.CountryUncheckedCreateWithoutRecipesInput>
+}
+
+export type CountryUpsertWithoutRecipesInput = {
+  update: Prisma.XOR<Prisma.CountryUpdateWithoutRecipesInput, Prisma.CountryUncheckedUpdateWithoutRecipesInput>
+  create: Prisma.XOR<Prisma.CountryCreateWithoutRecipesInput, Prisma.CountryUncheckedCreateWithoutRecipesInput>
+  where?: Prisma.CountryWhereInput
+}
+
+export type CountryUpdateToOneWithWhereWithoutRecipesInput = {
+  where?: Prisma.CountryWhereInput
+  data: Prisma.XOR<Prisma.CountryUpdateWithoutRecipesInput, Prisma.CountryUncheckedUpdateWithoutRecipesInput>
+}
+
+export type CountryUpdateWithoutRecipesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ingredients?: Prisma.IngredientUpdateManyWithoutNativeCountryNestedInput
+  ingredientSubstitutions?: Prisma.IngredientSubstitutionUpdateManyWithoutCountryNestedInput
+}
+
+export type CountryUncheckedUpdateWithoutRecipesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ingredients?: Prisma.IngredientUncheckedUpdateManyWithoutNativeCountryNestedInput
+  ingredientSubstitutions?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutCountryNestedInput
 }
 
 export type CountryCreateWithoutIngredientsInput = {
@@ -388,8 +442,8 @@ export type CountryCreateWithoutIngredientsInput = {
   code: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  recipeVariants?: Prisma.RecipeVariantCreateNestedManyWithoutCountryInput
   ingredientSubstitutions?: Prisma.IngredientSubstitutionCreateNestedManyWithoutCountryInput
+  recipes?: Prisma.RecipeCreateNestedManyWithoutCountryInput
 }
 
 export type CountryUncheckedCreateWithoutIngredientsInput = {
@@ -398,8 +452,8 @@ export type CountryUncheckedCreateWithoutIngredientsInput = {
   code: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  recipeVariants?: Prisma.RecipeVariantUncheckedCreateNestedManyWithoutCountryInput
   ingredientSubstitutions?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutCountryInput
+  recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutCountryInput
 }
 
 export type CountryCreateOrConnectWithoutIngredientsInput = {
@@ -424,8 +478,8 @@ export type CountryUpdateWithoutIngredientsInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  recipeVariants?: Prisma.RecipeVariantUpdateManyWithoutCountryNestedInput
   ingredientSubstitutions?: Prisma.IngredientSubstitutionUpdateManyWithoutCountryNestedInput
+  recipes?: Prisma.RecipeUpdateManyWithoutCountryNestedInput
 }
 
 export type CountryUncheckedUpdateWithoutIngredientsInput = {
@@ -434,8 +488,8 @@ export type CountryUncheckedUpdateWithoutIngredientsInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  recipeVariants?: Prisma.RecipeVariantUncheckedUpdateManyWithoutCountryNestedInput
   ingredientSubstitutions?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutCountryNestedInput
+  recipes?: Prisma.RecipeUncheckedUpdateManyWithoutCountryNestedInput
 }
 
 export type CountryCreateWithoutIngredientSubstitutionsInput = {
@@ -445,7 +499,7 @@ export type CountryCreateWithoutIngredientSubstitutionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   ingredients?: Prisma.IngredientCreateNestedManyWithoutNativeCountryInput
-  recipeVariants?: Prisma.RecipeVariantCreateNestedManyWithoutCountryInput
+  recipes?: Prisma.RecipeCreateNestedManyWithoutCountryInput
 }
 
 export type CountryUncheckedCreateWithoutIngredientSubstitutionsInput = {
@@ -455,7 +509,7 @@ export type CountryUncheckedCreateWithoutIngredientSubstitutionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   ingredients?: Prisma.IngredientUncheckedCreateNestedManyWithoutNativeCountryInput
-  recipeVariants?: Prisma.RecipeVariantUncheckedCreateNestedManyWithoutCountryInput
+  recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutCountryInput
 }
 
 export type CountryCreateOrConnectWithoutIngredientSubstitutionsInput = {
@@ -481,7 +535,7 @@ export type CountryUpdateWithoutIngredientSubstitutionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ingredients?: Prisma.IngredientUpdateManyWithoutNativeCountryNestedInput
-  recipeVariants?: Prisma.RecipeVariantUpdateManyWithoutCountryNestedInput
+  recipes?: Prisma.RecipeUpdateManyWithoutCountryNestedInput
 }
 
 export type CountryUncheckedUpdateWithoutIngredientSubstitutionsInput = {
@@ -491,63 +545,7 @@ export type CountryUncheckedUpdateWithoutIngredientSubstitutionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ingredients?: Prisma.IngredientUncheckedUpdateManyWithoutNativeCountryNestedInput
-  recipeVariants?: Prisma.RecipeVariantUncheckedUpdateManyWithoutCountryNestedInput
-}
-
-export type CountryCreateWithoutRecipeVariantsInput = {
-  id?: string
-  name: string
-  code: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  ingredients?: Prisma.IngredientCreateNestedManyWithoutNativeCountryInput
-  ingredientSubstitutions?: Prisma.IngredientSubstitutionCreateNestedManyWithoutCountryInput
-}
-
-export type CountryUncheckedCreateWithoutRecipeVariantsInput = {
-  id?: string
-  name: string
-  code: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  ingredients?: Prisma.IngredientUncheckedCreateNestedManyWithoutNativeCountryInput
-  ingredientSubstitutions?: Prisma.IngredientSubstitutionUncheckedCreateNestedManyWithoutCountryInput
-}
-
-export type CountryCreateOrConnectWithoutRecipeVariantsInput = {
-  where: Prisma.CountryWhereUniqueInput
-  create: Prisma.XOR<Prisma.CountryCreateWithoutRecipeVariantsInput, Prisma.CountryUncheckedCreateWithoutRecipeVariantsInput>
-}
-
-export type CountryUpsertWithoutRecipeVariantsInput = {
-  update: Prisma.XOR<Prisma.CountryUpdateWithoutRecipeVariantsInput, Prisma.CountryUncheckedUpdateWithoutRecipeVariantsInput>
-  create: Prisma.XOR<Prisma.CountryCreateWithoutRecipeVariantsInput, Prisma.CountryUncheckedCreateWithoutRecipeVariantsInput>
-  where?: Prisma.CountryWhereInput
-}
-
-export type CountryUpdateToOneWithWhereWithoutRecipeVariantsInput = {
-  where?: Prisma.CountryWhereInput
-  data: Prisma.XOR<Prisma.CountryUpdateWithoutRecipeVariantsInput, Prisma.CountryUncheckedUpdateWithoutRecipeVariantsInput>
-}
-
-export type CountryUpdateWithoutRecipeVariantsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ingredients?: Prisma.IngredientUpdateManyWithoutNativeCountryNestedInput
-  ingredientSubstitutions?: Prisma.IngredientSubstitutionUpdateManyWithoutCountryNestedInput
-}
-
-export type CountryUncheckedUpdateWithoutRecipeVariantsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ingredients?: Prisma.IngredientUncheckedUpdateManyWithoutNativeCountryNestedInput
-  ingredientSubstitutions?: Prisma.IngredientSubstitutionUncheckedUpdateManyWithoutCountryNestedInput
+  recipes?: Prisma.RecipeUncheckedUpdateManyWithoutCountryNestedInput
 }
 
 
@@ -557,14 +555,14 @@ export type CountryUncheckedUpdateWithoutRecipeVariantsInput = {
 
 export type CountryCountOutputType = {
   ingredients: number
-  recipeVariants: number
   ingredientSubstitutions: number
+  recipes: number
 }
 
 export type CountryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ingredients?: boolean | CountryCountOutputTypeCountIngredientsArgs
-  recipeVariants?: boolean | CountryCountOutputTypeCountRecipeVariantsArgs
   ingredientSubstitutions?: boolean | CountryCountOutputTypeCountIngredientSubstitutionsArgs
+  recipes?: boolean | CountryCountOutputTypeCountRecipesArgs
 }
 
 /**
@@ -587,15 +585,15 @@ export type CountryCountOutputTypeCountIngredientsArgs<ExtArgs extends runtime.T
 /**
  * CountryCountOutputType without action
  */
-export type CountryCountOutputTypeCountRecipeVariantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.RecipeVariantWhereInput
+export type CountryCountOutputTypeCountIngredientSubstitutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IngredientSubstitutionWhereInput
 }
 
 /**
  * CountryCountOutputType without action
  */
-export type CountryCountOutputTypeCountIngredientSubstitutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.IngredientSubstitutionWhereInput
+export type CountryCountOutputTypeCountRecipesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RecipeWhereInput
 }
 
 
@@ -606,8 +604,8 @@ export type CountrySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   updatedAt?: boolean
   ingredients?: boolean | Prisma.Country$ingredientsArgs<ExtArgs>
-  recipeVariants?: boolean | Prisma.Country$recipeVariantsArgs<ExtArgs>
   ingredientSubstitutions?: boolean | Prisma.Country$ingredientSubstitutionsArgs<ExtArgs>
+  recipes?: boolean | Prisma.Country$recipesArgs<ExtArgs>
   _count?: boolean | Prisma.CountryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["country"]>
 
@@ -638,8 +636,8 @@ export type CountrySelectScalar = {
 export type CountryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "createdAt" | "updatedAt", ExtArgs["result"]["country"]>
 export type CountryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ingredients?: boolean | Prisma.Country$ingredientsArgs<ExtArgs>
-  recipeVariants?: boolean | Prisma.Country$recipeVariantsArgs<ExtArgs>
   ingredientSubstitutions?: boolean | Prisma.Country$ingredientSubstitutionsArgs<ExtArgs>
+  recipes?: boolean | Prisma.Country$recipesArgs<ExtArgs>
   _count?: boolean | Prisma.CountryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CountryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -649,8 +647,8 @@ export type $CountryPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Country"
   objects: {
     ingredients: Prisma.$IngredientPayload<ExtArgs>[]
-    recipeVariants: Prisma.$RecipeVariantPayload<ExtArgs>[]
     ingredientSubstitutions: Prisma.$IngredientSubstitutionPayload<ExtArgs>[]
+    recipes: Prisma.$RecipePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1053,8 +1051,8 @@ readonly fields: CountryFieldRefs;
 export interface Prisma__CountryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   ingredients<T extends Prisma.Country$ingredientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$ingredientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  recipeVariants<T extends Prisma.Country$recipeVariantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$recipeVariantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecipeVariantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ingredientSubstitutions<T extends Prisma.Country$ingredientSubstitutionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$ingredientSubstitutionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IngredientSubstitutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  recipes<T extends Prisma.Country$recipesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$recipesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1506,30 +1504,6 @@ export type Country$ingredientsArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * Country.recipeVariants
- */
-export type Country$recipeVariantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the RecipeVariant
-   */
-  select?: Prisma.RecipeVariantSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the RecipeVariant
-   */
-  omit?: Prisma.RecipeVariantOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.RecipeVariantInclude<ExtArgs> | null
-  where?: Prisma.RecipeVariantWhereInput
-  orderBy?: Prisma.RecipeVariantOrderByWithRelationInput | Prisma.RecipeVariantOrderByWithRelationInput[]
-  cursor?: Prisma.RecipeVariantWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.RecipeVariantScalarFieldEnum | Prisma.RecipeVariantScalarFieldEnum[]
-}
-
-/**
  * Country.ingredientSubstitutions
  */
 export type Country$ingredientSubstitutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1551,6 +1525,30 @@ export type Country$ingredientSubstitutionsArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.IngredientSubstitutionScalarFieldEnum | Prisma.IngredientSubstitutionScalarFieldEnum[]
+}
+
+/**
+ * Country.recipes
+ */
+export type Country$recipesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Recipe
+   */
+  select?: Prisma.RecipeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Recipe
+   */
+  omit?: Prisma.RecipeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RecipeInclude<ExtArgs> | null
+  where?: Prisma.RecipeWhereInput
+  orderBy?: Prisma.RecipeOrderByWithRelationInput | Prisma.RecipeOrderByWithRelationInput[]
+  cursor?: Prisma.RecipeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RecipeScalarFieldEnum | Prisma.RecipeScalarFieldEnum[]
 }
 
 /**

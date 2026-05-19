@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -24,59 +19,106 @@ model User {
 }
 
 model Recipe {
-  id            String    @id @default(uuid())  // UUID primary key
-  recipeSlug    String    @unique               // Unique slug for URL-friendly identifiers
-  imageKey      String?                         // Optional image key for AWS S3 storage
-  user          User     @relation(fields: [userId], references: [id])
-  userId        String
-  title         String
-  description   String
-  baseServings  Int      @default(2)
-  ingredients   RecipeIngredient[]
-  instructions  String[]
-  variants      RecipeVariant[]
-  favoritedBy   FavoriteRecipe[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id              String   @id @default(uuid())
+
+  parentRecipeId  String?  
+  parentRecipe    Recipe?  @relation("RecipeVariants", fields: [parentRecipeId], references: [id], onDelete: SetNull)
+  variants        Recipe[] @relation("RecipeVariants")
+
+  recipeSlug      String   @unique
+  imageKey        String?
+
+  user            User     @relation(fields: [userId], references: [id])
+  userId          String
+
+  country         Country @relation(fields: [countryId], references: [id])
+  countryId       String
+  
+  title           String
+  description     String
+  baseServings    Int      @default(2)
+  cookTimeMinutes Int?
+  prepTimeMinutes Int?
+
+  ingredients     RecipeIngredient[]
+  instructions    RecipeInstruction[]
+  favoritedBy     FavoriteRecipe[]
+  tags            RecipeTag[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+
+model RecipeInstruction {
+  id                     String   @id @default(uuid())
+  recipe                 Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId               String
+  stepNo                 Int
+  instructionDescription String
+  stepImageKey           String?
+  additionalNotes        String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+  @@unique([recipeId, stepNo])
+}
+model Tag {
+  id        String   @id @default(uuid())
+  name      String   
+  slug      String   @unique
+  recipes   RecipeTag[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RecipeTag {
+  id        String   @id @default(uuid())
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId  String
+  tag       Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  tagId     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([recipeId, tagId])
 }
 
 //This is your nutrition source of truth.
 model Ingredient {
-  id            String   @id @default(uuid())
-  ingredientId        String
-  name                String
-  caloriesPer100g     Float
-  proteinPer100g      Float
-  fatPer100g          Float
-  carbohydratesPer100g Float
-  nativeCountry           Country? @relation(fields: [nativeCountryId], references: [id])
+  id                      String   @id @default(uuid())
+  ingredientId            String   @unique
+  name                    String   @unique
+  caloriesPer100g         Float?
+  proteinPer100g          Float?
+  fatPer100g              Float?
+  carbohydratesPer100g    Float?
+  nativeCountry           Country? @relation(fields: [nativeCountryId], references: [id]) 
   nativeCountryId         String?
 
-  recipeLinks             RecipeIngredient[]
-  recipeVariantLinks      RecipeVariantIngredient[]
+  recipeIngredients       RecipeIngredient[]
   
   substitutionsFrom       IngredientSubstitution[] @relation("SubstitutionFrom")
   substitutionsTo         IngredientSubstitution[] @relation("SubstitutionTo")
 
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
 }
 
+// This explains possible substitutions for an ingredient
 model IngredientSubstitution {
   id               String     @id @default(uuid())
 
-  fromIngredient   Ingredient @relation("SubstitutionFrom", fields: [fromIngredientId], references: [id])
+  fromIngredient   Ingredient @relation("SubstitutionFrom", fields: [fromIngredientId], references: [id]) //original ingredient
   fromIngredientId String
 
-  toIngredient     Ingredient @relation("SubstitutionTo", fields: [toIngredientId], references: [id])
+  toIngredient     Ingredient @relation("SubstitutionTo", fields: [toIngredientId], references: [id]) //substituted ingredient
   toIngredientId   String
 
-  country          Country?   @relation(fields: [countryId], references: [id])
-  countryId        String?
+  country          Country   @relation(fields: [countryId], references: [id]) //country-specific substitution
+  countryId        String
 
-  ratio            Float      @default(1)
-  notes            String?
-  confidence       Float?
+  ratio            Float?      @default(1) // ratio of the substituted ingredient to the original ingredient
+  usageNotes       String?     // notes about how to use the substituted ingredient
+  qualityScore     Int?     //This 0-5 score represents how well the substitution maintains the original ingredient's properties (flavor, texture, nutritional value) 0 is the lowest quality, 5 is the highest quality
 
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
@@ -84,15 +126,19 @@ model IngredientSubstitution {
   @@unique([fromIngredientId, toIngredientId, countryId])
 }
 
-//This means that this recipe uses this ingredient in this amount
+// The ingredients for a specific recipe
 model RecipeIngredient {
    id           String     @id @default(uuid())
 
-  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  recipe       Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId     String
 
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId String
+  
+  replacesRecipeIngredient   RecipeIngredient?  @relation("IngredientReplacement", fields: [replacesRecipeIngredientId], references: [id], onDelete: SetNull)
+  replacesRecipeIngredientId String?
+  replacedByIngredients      RecipeIngredient[] @relation("IngredientReplacement")
 
   quantity     Float
   unit         UnitType
@@ -100,41 +146,6 @@ model RecipeIngredient {
 
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-}
-
-model RecipeVariant {
-  id            String    @id @default(uuid())
-
-  baseRecipe    Recipe    @relation(fields: [baseRecipeId], references: [id])
-  baseRecipeId  String
-
-  country       Country   @relation(fields: [countryId], references: [id])
-  countryId     String
-
-  title         String
-  description   String?
-  ingredients   RecipeVariantIngredient[]
-  instructions  String[]
-
-  notes         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  @@unique([baseRecipeId, countryId])
-}
-
-model RecipeVariantIngredient {
-  id              String        @id @default(uuid())
-
-  recipeVariant   RecipeVariant @relation(fields: [recipeVariantId], references: [id])
-  recipeVariantId String
-
-  ingredient      Ingredient    @relation(fields: [ingredientId], references: [id])
-  ingredientId    String
-
-  quantity        Float
-  unit            UnitType
-  note            String?
 }
 
 enum UnitType {
@@ -150,22 +161,24 @@ enum UnitType {
 }
 
 model FavoriteRecipe {
-  id        String   @id @default(uuid())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  recipe    Recipe   @relation(fields: [recipeId], references: [id])
-  recipeId  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(uuid())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  recipe      Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([userId, recipeId])
 }
 
 model Country {
-  id        String   @id @default(uuid())
-  name      String
-  code      String
-  ingredients Ingredient[]
-  recipeVariants RecipeVariant[]
+  id                      String   @id @default(uuid())
+  name                    String   @unique
+  code                    String   @unique
+  ingredients             Ingredient[]
   ingredientSubstitutions IngredientSubstitution[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  recipes           Recipe[]
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
 }

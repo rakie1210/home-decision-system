@@ -32,6 +32,10 @@ if (!JWT_SECRET) {
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use((req, _res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
 
 // Middleware to verify JWT
 const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
@@ -84,40 +88,37 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-export function createNewRecipe() {
-  // Create a new recipe
-  app.post("/api/recipes", authenticateToken, async (req, res) => {
-    try {
-      const {
-        title,
-        description,
-        baseServings,
-        ingredients,
-        instructions,
-        imageKey,
-      } = req.body;
-      const recipe = await prisma.recipe.create({
-        data: {
-          title,
-          recipeSlug: createRecipeSlug(title),
-          imageKey,
-          description,
-          baseServings,
-          instructions,
-          ingredients,
-          userId: req.user.id,
-        },
-      });
-      res.json(recipe);
-    } catch (error: any) {
-      res.status(400).json({ error: error.message });
-    }
-  });
-}
+// Logout a user
+app.post("/api/logout", authenticateToken, async (req, res) => {
+  res.clearCookie("token");
+  res.json({ message: "User logged out successfully" });
+});
 
 // Health check endpoint
 app.get("/", (_req, res) => {
   res.json({ message: "Home Decision System API is running!" });
+});
+
+/**
+ * Get all countries
+ * returns: Array of countries (id, name, code)
+ */
+app.get("/api/getCountries", async (_req, res) => {
+  try {
+    const countries = await prisma.country.findMany({
+      select: {
+        id: true,
+        name: true,
+        code: true,
+      },
+      orderBy: {
+        name: "asc",
+      },
+    });
+    return res.json(countries);
+  } catch (error: any) {
+    return res.status(500).json({ error: "Failed to fetch countries" });
+  }
 });
 
 app.listen(3001, () => {

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Homewise house heart icon</title>
+  <desc id="desc">A soft olive home icon with a warm heart inside.</desc>
+
+  <defs>
+    <linearGradient id="homeFill" x1="105" y1="142" x2="407" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF9EC"/>
+      <stop offset="1" stop-color="#F4E8CB"/>
+    </linearGradient>
+    <linearGradient id="oliveStroke" x1="77" y1="75" x2="434" y2="434" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#91A27B"/>
+      <stop offset="1" stop-color="#667856"/>
+    </linearGradient>
+    <linearGradient id="heartFill" x1="194" y1="213" x2="326" y2="347" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#D88952"/>
+      <stop offset="1" stop-color="#B8643C"/>
+    </linearGradient>
+    <filter id="softShadow" x="52" y="54" width="408" height="406" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="13" flood-color="#253018" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <path d="M94 232L242.202 103.438C250.106 96.58 261.894 96.58 269.798 103.438L418 232" stroke="url(#oliveStroke)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M130 210V400C130 415.464 142.536 428 158 428H354C369.464 428 382 415.464 382 400V210L256 101L130 210Z" fill="url(#homeFill)" stroke="url(#oliveStroke)" stroke-width="26" stroke-linejoin="round"/>
+    <path d="M344 178V119H390V218" stroke="url(#oliveStroke)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="M256 347C249.88 341.651 235.938 329.74 221.88 316.35C196.874 292.535 180 273.326 180 249.238C180 221.923 199.906 202 225.052 202C238.859 202 250.104 208.254 256 217.197C261.896 208.254 273.141 202 286.948 202C312.094 202 332 221.923 332 249.238C332 273.326 315.126 292.535 290.12 316.35C276.062 329.74 262.12 341.651 256 347Z" fill="url(#heartFill)"/>
+    <path d="M256 347C249.88 341.651 235.938 329.74 221.88 316.35C196.874 292.535 180 273.326 180 249.238C180 221.923 199.906 202 225.052 202C238.859 202 250.104 208.254 256 217.197C261.896 208.254 273.141 202 286.948 202C312.094 202 332 221.923 332 249.238C332 273.326 315.126 292.535 290.12 316.35C276.062 329.74 262.12 341.651 256 347Z" stroke="#FFF9EC" stroke-width="10" stroke-linejoin="round"/>
+  </g>
+</svg>

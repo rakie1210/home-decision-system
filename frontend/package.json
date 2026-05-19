@@ -16,6 +16,7 @@
     "@rolldown/binding-darwin-arm64": "1.0.0-rc.17",
     "@rollup/rollup-darwin-arm64": "^4.60.2",
     "@tailwindcss/vite": "^4.2.4",
+    "@tanstack/react-query": "^5.100.10",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "radix-ui": "^1.4.3",

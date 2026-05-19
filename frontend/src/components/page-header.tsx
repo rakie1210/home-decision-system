@@ -54,6 +54,14 @@ export function PageHeader({
 }: PageHeaderProps) {
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    const getSessionStorage = sessionStorage.getItem("token");
+    if (getSessionStorage) {
+      sessionStorage.removeItem("token");
+    }
+    navigate("/");
+  };
+
   return (
     <header className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
       <div>
@@ -133,7 +141,7 @@ export function PageHeader({
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem variant="destructive">
+                <DropdownMenuItem variant="destructive" onClick={handleLogout}>
                   Log out
                 </DropdownMenuItem>
               </DropdownMenuGroup>

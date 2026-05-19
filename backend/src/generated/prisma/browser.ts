@@ -28,6 +28,21 @@ export type User = Prisma.UserModel
  */
 export type Recipe = Prisma.RecipeModel
 /**
+ * Model RecipeInstruction
+ * 
+ */
+export type RecipeInstruction = Prisma.RecipeInstructionModel
+/**
+ * Model Tag
+ * 
+ */
+export type Tag = Prisma.TagModel
+/**
+ * Model RecipeTag
+ * 
+ */
+export type RecipeTag = Prisma.RecipeTagModel
+/**
  * Model Ingredient
  * 
  */
@@ -42,16 +57,6 @@ export type IngredientSubstitution = Prisma.IngredientSubstitutionModel
  * 
  */
 export type RecipeIngredient = Prisma.RecipeIngredientModel
-/**
- * Model RecipeVariant
- * 
- */
-export type RecipeVariant = Prisma.RecipeVariantModel
-/**
- * Model RecipeVariantIngredient
- * 
- */
-export type RecipeVariantIngredient = Prisma.RecipeVariantIngredientModel
 /**
  * Model FavoriteRecipe
  * 

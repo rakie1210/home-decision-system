@@ -39,8 +39,7 @@ function App() {
 
     if (Object.keys(nextErrors).length === 0) {
       try {
-        const token = await login(email, password);
-        localStorage.setItem("token", token);
+        await login(email, password, rememberMe);
         navigate("/dashboard");
       } catch (error) {
         setErrors({
@@ -51,6 +50,11 @@ function App() {
         });
       }
     }
+  }
+
+  function handleRememberMe(event: React.ChangeEvent<HTMLInputElement>) {
+    const isRemember = event.target.checked;
+    setRememberMe(isRemember);
   }
 
   function onLogin(value: string) {
@@ -164,7 +168,7 @@ function App() {
                 <input
                   checked={rememberMe}
                   className="size-4 rounded border-input accent-primary"
-                  onChange={(event) => setRememberMe(event.target.checked)}
+                  onChange={handleRememberMe}
                   type="checkbox"
                 />
                 Remember me

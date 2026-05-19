@@ -198,6 +198,7 @@ export type FavoriteRecipeOrderByWithRelationInput = {
 
 export type FavoriteRecipeWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  userId_recipeId?: Prisma.FavoriteRecipeUserIdRecipeIdCompoundUniqueInput
   AND?: Prisma.FavoriteRecipeWhereInput | Prisma.FavoriteRecipeWhereInput[]
   OR?: Prisma.FavoriteRecipeWhereInput[]
   NOT?: Prisma.FavoriteRecipeWhereInput | Prisma.FavoriteRecipeWhereInput[]
@@ -207,7 +208,7 @@ export type FavoriteRecipeWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"FavoriteRecipe"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   recipe?: Prisma.XOR<Prisma.RecipeScalarRelationFilter, Prisma.RecipeWhereInput>
-}, "id">
+}, "id" | "userId_recipeId">
 
 export type FavoriteRecipeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -293,6 +294,11 @@ export type FavoriteRecipeListRelationFilter = {
 
 export type FavoriteRecipeOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type FavoriteRecipeUserIdRecipeIdCompoundUniqueInput = {
+  userId: string
+  recipeId: string
 }
 
 export type FavoriteRecipeCountOrderByAggregateInput = {
