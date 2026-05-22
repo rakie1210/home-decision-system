@@ -130,6 +130,16 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-badge-sky: var(--badge-sky);
+  --color-badge-sky-foreground: var(--badge-sky-foreground);
+  --color-badge-peach: var(--badge-peach);
+  --color-badge-peach-foreground: var(--badge-peach-foreground);
+  --color-badge-sage: var(--badge-sage);
+  --color-badge-sage-foreground: var(--badge-sage-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
