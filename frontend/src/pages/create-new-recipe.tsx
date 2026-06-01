@@ -56,8 +56,8 @@ import {
   ComboboxItem,
   ComboboxList,
   ComboboxSeparator,
-  useComboboxAnchor,
 } from "@/components/ui/combobox";
+import { useComboboxAnchor } from "@/components/ui/combobox-anchor";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
