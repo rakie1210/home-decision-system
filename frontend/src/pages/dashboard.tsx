@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { HugeiconsIcon } from "@hugeicons/react";
 
@@ -28,52 +28,55 @@ import pistachioRaspberryCake from "@/assets/meals/pistachio-raspberry-cake.jpg"
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const mealSuggestionsData = [
-    {
-      startTime: "04:00",
-      endTime: "11:00",
-      mealType: "breakfast",
-      suggestion:
-        "Good morning. Let's make breakfast cozy enough to convince the day to behave.",
-      image: breakfastImage,
-    },
-    {
-      startTime: "11:01",
-      endTime: "13:59",
-      mealType: "lunch",
-      suggestion:
-        "It is lunchtime. Let's make something fresh, filling, and very proud of itself.",
-      image: lunchImage,
-      currentPage: "dashboard",
-    },
-    {
-      startTime: "14:00",
-      endTime: "17:59",
-      mealType: "snack",
-      suggestion:
-        "Afternoon snack time. Let's make a little treat before dinner starts asking questions.",
-      image: afterNoonImage,
-      currentPage: "dashboard",
-    },
-    {
-      startTime: "18:00",
-      endTime: "21:59",
-      mealType: "dinner",
-      suggestion:
-        "Dinner time. Let's cook something warm, satisfying, and worthy of a second helping.",
-      image: dinnerImage,
-      currentPage: "dashboard",
-    },
-    {
-      startTime: "22:00",
-      endTime: "03:59",
-      mealType: "midnight_snack",
-      suggestion:
-        "Late-night kitchen visit? Let's make something cozy, quiet, and absolutely not judgey.",
-      image: midnightImage,
-      currentPage: "dashboard",
-    },
-  ];
+  const mealSuggestionsData = useMemo(
+    () => [
+      {
+        startTime: "04:00",
+        endTime: "11:00",
+        mealType: "breakfast",
+        suggestion:
+          "Good morning. Let's make breakfast cozy enough to convince the day to behave.",
+        image: breakfastImage,
+      },
+      {
+        startTime: "11:01",
+        endTime: "13:59",
+        mealType: "lunch",
+        suggestion:
+          "It is lunchtime. Let's make something fresh, filling, and very proud of itself.",
+        image: lunchImage,
+        currentPage: "dashboard",
+      },
+      {
+        startTime: "14:00",
+        endTime: "17:59",
+        mealType: "snack",
+        suggestion:
+          "Afternoon snack time. Let's make a little treat before dinner starts asking questions.",
+        image: afterNoonImage,
+        currentPage: "dashboard",
+      },
+      {
+        startTime: "18:00",
+        endTime: "21:59",
+        mealType: "dinner",
+        suggestion:
+          "Dinner time. Let's cook something warm, satisfying, and worthy of a second helping.",
+        image: dinnerImage,
+        currentPage: "dashboard",
+      },
+      {
+        startTime: "22:00",
+        endTime: "03:59",
+        mealType: "midnight_snack",
+        suggestion:
+          "Late-night kitchen visit? Let's make something cozy, quiet, and absolutely not judgey.",
+        image: midnightImage,
+        currentPage: "dashboard",
+      },
+    ],
+    [],
+  );
   const favoriteRecipes = [
     {
       title: "Creamy Tomato Pasta",

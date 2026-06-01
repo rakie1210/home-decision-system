@@ -1,69 +1,26 @@
 import {
   Children,
-  createContext,
   type HTMLAttributes,
   isValidElement,
   type ReactElement,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
 
+import {
+  StepperContext,
+  StepItemContext,
+  useStepper,
+  useStepItem,
+  type StepIndicators,
+  type StepperOrientation,
+  type StepState,
+} from "./stepper-context";
+
 import { cn } from "@/lib/utils";
-
-// Types
-type StepperOrientation = "horizontal" | "vertical";
-type StepState = "active" | "completed" | "inactive" | "loading";
-type StepIndicators = {
-  active?: React.ReactNode;
-  completed?: React.ReactNode;
-  inactive?: React.ReactNode;
-  loading?: React.ReactNode;
-};
-
-interface StepperContextValue {
-  activeStep: number;
-  setActiveStep: (step: number) => void;
-  stepsCount: number;
-  orientation: StepperOrientation;
-  interactive: boolean;
-  registerTrigger: (node: HTMLButtonElement | null) => void;
-  triggerNodes: HTMLButtonElement[];
-  focusNext: (currentIdx: number) => void;
-  focusPrev: (currentIdx: number) => void;
-  focusFirst: () => void;
-  focusLast: () => void;
-  indicators: StepIndicators;
-}
-
-interface StepItemContextValue {
-  step: number;
-  state: StepState;
-  isDisabled: boolean;
-  isLoading: boolean;
-}
-
-const StepperContext = createContext<StepperContextValue | undefined>(
-  undefined,
-);
-const StepItemContext = createContext<StepItemContextValue | undefined>(
-  undefined,
-);
-
-function useStepper() {
-  const ctx = useContext(StepperContext);
-  if (!ctx) throw new Error("useStepper must be used within a Stepper");
-  return ctx;
-}
-
-function useStepItem() {
-  const ctx = useContext(StepItemContext);
-  if (!ctx) throw new Error("useStepItem must be used within a StepperItem");
-  return ctx;
-}
 
 interface StepperProps extends HTMLAttributes<HTMLDivElement> {
   defaultValue?: number;
@@ -114,18 +71,41 @@ function Stepper({
   const currentStep = value ?? activeStep;
 
   // Keyboard navigation logic
-  const focusTrigger = (idx: number) => {
-    if (triggerNodes[idx]) triggerNodes[idx].focus();
-  };
-  const focusNext = (currentIdx: number) =>
-    focusTrigger((currentIdx + 1) % triggerNodes.length);
-  const focusPrev = (currentIdx: number) =>
-    focusTrigger((currentIdx - 1 + triggerNodes.length) % triggerNodes.length);
-  const focusFirst = () => focusTrigger(0);
-  const focusLast = () => focusTrigger(triggerNodes.length - 1);
+  const focusTrigger = useCallback(
+    (idx: number) => {
+      if (triggerNodes[idx]) {
+        triggerNodes[idx].focus();
+      }
+    },
+    [triggerNodes],
+  );
+
+  const focusNext = useCallback(
+    (currentIdx: number) => {
+      focusTrigger((currentIdx + 1) % triggerNodes.length);
+    },
+    [focusTrigger, triggerNodes.length],
+  );
+
+  const focusPrev = useCallback(
+    (currentIdx: number) => {
+      focusTrigger(
+        (currentIdx - 1 + triggerNodes.length) % triggerNodes.length,
+      );
+    },
+    [focusTrigger, triggerNodes.length],
+  );
+
+  const focusFirst = useCallback(() => {
+    focusTrigger(0);
+  }, [focusTrigger]);
+
+  const focusLast = useCallback(() => {
+    focusTrigger(triggerNodes.length - 1);
+  }, [focusTrigger, triggerNodes.length]);
 
   // Context value
-  const contextValue = useMemo<StepperContextValue>(
+  const contextValue = useMemo(
     () => ({
       activeStep: currentStep,
       setActiveStep: handleSetActiveStep,
@@ -483,8 +463,6 @@ function StepperContent({
 }
 
 export {
-  useStepper,
-  useStepItem,
   Stepper,
   StepperItem,
   StepperTrigger,
