@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HugeiconsIcon } from "@hugeicons/react";
 
@@ -111,7 +111,7 @@ export default function Dashboard() {
     },
   ];
 
-  const getCurrentMealSuggestion = () => {
+  const getCurrentMealSuggestion = useCallback(() => {
     const currentMealSuggestion = mealSuggestionsData.find((suggestion) => {
       const [startHour, startMinute] = suggestion.startTime
         .split(":")
@@ -138,7 +138,7 @@ export default function Dashboard() {
       );
     });
     return currentMealSuggestion;
-  };
+  }, [mealSuggestionsData]);
 
   const [kitchenNote, setKitchenNote] = useState(getCurrentMealSuggestion);
 
@@ -148,7 +148,7 @@ export default function Dashboard() {
     }, 60_000);
 
     return () => window.clearInterval(interval);
-  }, []);
+  }, [getCurrentMealSuggestion]);
 
   return (
     <SideBarLayout

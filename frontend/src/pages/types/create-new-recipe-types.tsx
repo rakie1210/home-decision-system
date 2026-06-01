@@ -2,11 +2,13 @@ export type ReciperFormValues = {
   recipeId: string | null;
   recipeName: string;
   recipeDescription: string;
+  recipeImageUrl?: string | null;
+  recipeImageFile?: File | null;
   baseServings: number;
   prepTime: number;
   cookTime: number;
+  recipeCountry: string;
   originalCountry: string;
-  variantCountry: string;
   ingredients: IngredientRow[];
   cookingSteps: CookingStep[];
   tags: string[];
