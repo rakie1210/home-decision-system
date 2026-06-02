@@ -15,6 +15,7 @@ import { RecipeCard } from "@/components/recipe-card";
 import { Search, Plus, Filter } from "@hugeicons/core-free-icons";
 
 // assets
+
 import cardImage from "@/assets/pancake-v2.png";
 import pottedPlantsImage from "@/assets/potted-plants.png";
 import breakfastImage from "@/assets/morning.png";
@@ -24,6 +25,7 @@ import dinnerImage from "@/assets/night.png";
 import midnightImage from "@/assets/midnight.png";
 import taiyaki from "@/assets/meals/taiyaki.png";
 import binignit from "@/assets/meals/binignit.png";
+import creamyTomatoPasta from "@/assets/meals/creamy-tomato-pasta.png";
 import pistachioRaspberryCake from "@/assets/meals/pistachio-raspberry-cake.jpg";
 
 export default function Dashboard() {
@@ -80,7 +82,7 @@ export default function Dashboard() {
   const favoriteRecipes = [
     {
       title: "Creamy Tomato Pasta",
-      image: "/dashboard-images/creamy-tomato-pasta.png",
+      image: creamyTomatoPasta,
       duration: "25 min",
       difficulty: "Easy",
       rating: "4.8",

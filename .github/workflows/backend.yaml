@@ -41,5 +41,6 @@ jobs:
 
       - name: Build
         run: pnpm build
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Docker Build
+        run: docker build -t home-wise-backend -f Dockerfile/dockerfile .
