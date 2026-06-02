@@ -6,12 +6,12 @@ import express, {
   type NextFunction,
 } from "express";
 import jwt from "jsonwebtoken";
-import { prisma } from "./prisma";
-import { UnitType } from "./generated/prisma/client";
+import { prisma } from "./prisma.js";
+import { UnitType } from "./generated/prisma/client.js";
 import { env } from "process";
 import cors from "cors";
 import multer from "multer";
-import { uploadRecipeImageToS3, createRecipeSlug } from "./helper";
+import { uploadRecipeImageToS3, createRecipeSlug } from "./helper.js";
 
 declare global {
   namespace Express {
@@ -58,6 +58,8 @@ if (!JWT_SECRET) {
   throw new Error("JWT_SECRET environment variable is required");
 }
 
+const jwtSecret = JWT_SECRET;
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -73,7 +75,7 @@ const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
 
   if (!token) return res.sendStatus(401);
 
-  jwt.verify(token, JWT_SECRET!, (err: any, user: any) => {
+  jwt.verify(token, jwtSecret, (err: any, user: any) => {
     if (err) return res.sendStatus(403);
     req.user = user;
     next();
@@ -232,8 +234,9 @@ app.post("/api/login", async (req, res) => {
     if (!user || user.password !== password) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
+    const payload = { id: user.id, email: user.email };
 
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET!);
+    const token = jwt.sign(payload, jwtSecret);
     res.json({ token });
   } catch (error: any) {
     res.status(400).json({ error: error.message });
@@ -308,7 +311,10 @@ app.post(
 
       const stepImageKeys = await Promise.all(
         payload.cookingSteps.map(async (step) => {
-          if (step.imageFileIndex === null || step.imageFileIndex === undefined) {
+          if (
+            step.imageFileIndex === null ||
+            step.imageFileIndex === undefined
+          ) {
             return null;
           }
 

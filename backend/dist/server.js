@@ -2,12 +2,12 @@ import "dotenv/config";
 import crypto from "crypto";
 import express, {} from "express";
 import jwt from "jsonwebtoken";
-import { prisma } from "./prisma";
-import { UnitType } from "./generated/prisma/client";
+import { prisma } from "./prisma.js";
+import { UnitType } from "./generated/prisma/client.js";
 import { env } from "process";
 import cors from "cors";
 import multer from "multer";
-import { uploadRecipeImageToS3, createRecipeSlug } from "./helper";
+import { uploadRecipeImageToS3, createRecipeSlug } from "./helper.js";
 const upload = multer({
     storage: multer.memoryStorage(),
 });
@@ -15,6 +15,7 @@ const JWT_SECRET = env.JWT_SECRET;
 if (!JWT_SECRET) {
     throw new Error("JWT_SECRET environment variable is required");
 }
+const jwtSecret = JWT_SECRET;
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -28,7 +29,7 @@ const authenticateToken = (req, res, next) => {
     const token = authHeader && authHeader.split(" ")[1];
     if (!token)
         return res.sendStatus(401);
-    jwt.verify(token, JWT_SECRET, (err, user) => {
+    jwt.verify(token, jwtSecret, (err, user) => {
         if (err)
             return res.sendStatus(403);
         req.user = user;
@@ -162,7 +163,8 @@ app.post("/api/login", async (req, res) => {
         if (!user || user.password !== password) {
             return res.status(401).json({ error: "Invalid credentials" });
         }
-        const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET);
+        const payload = { id: user.id, email: user.email };
+        const token = jwt.sign(payload, jwtSecret);
         res.json({ token });
     }
     catch (error) {
@@ -227,7 +229,8 @@ app.post("/api/saveNewRecipe", authenticateToken, upload.fields([
             ? await uploadRecipeImageToS3({ recipeId, file: recipeImage })
             : null;
         const stepImageKeys = await Promise.all(payload.cookingSteps.map(async (step) => {
-            if (step.imageFileIndex === null || step.imageFileIndex === undefined) {
+            if (step.imageFileIndex === null ||
+                step.imageFileIndex === undefined) {
                 return null;
             }
             const file = stepImages[step.imageFileIndex];

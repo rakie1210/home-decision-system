@@ -1,5 +1,5 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { s3, s3Bucket } from "./s3";
+import { s3, s3Bucket } from "./s3.js";
 import crypto from "crypto";
 import slugify from "slugify";
 import { nanoid } from "nanoid";

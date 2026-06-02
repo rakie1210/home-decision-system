@@ -30,8 +30,7 @@
     "prisma:generate": "prisma generate",
     "db:seed": "tsx prisma/seed.ts",
     "dev": "tsx watch ./src/server.ts",
-    "build": "pnpm run clean && tsc && pnpm run move:prisma",
-    "move:prisma": "mkdir -p dist/prisma && mv dist/prisma.* dist/prisma/",
+    "build": "pnpm run clean && tsc",
     "start": "node ./dist/server.js"
   },
   "prisma": {
